@@ -7,22 +7,25 @@ body {
   margin: 0px;
   height: 5%;
   vertical-align: middle;
-  padding: 1%;
-  /* padding-top: 1%;
-  padding-bottom: 1%; */
-}
-
-.topbar img {
-  vertical-align: middle;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 .topbar a {
+  vertical-align: middle;
   color: #ffffff;
   text-decoration: none;
-  margin-left: 1%;
-  padding: 2%;
+  padding: 1%;
+  /* box-sizing: border-box; */
+  /* max-height: inherit; */
 }
 
 .topbar a:hover {
   background-color: #92e782;
+  text-decoration: none;
+}
+
+#navbar_logo {
+  max-width: 10%;
+  max-height: 10%;
 }

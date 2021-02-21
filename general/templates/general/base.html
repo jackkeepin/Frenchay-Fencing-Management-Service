@@ -10,11 +10,13 @@
 
     <body>
 
-        <div class="topbar">
-            <img src="{% static 'general/logosmall.jpg' %}" alt="Frenchay Fencing Logo" style="max-width: 15%; max-height: 15%;"/>
-            <a id="title" href="{% url 'quote-home' %}">Home</a>
-            <a id="anotherLink" href="#">Second link</a>
-        </div>
+        <div class="flex-container">
+            <div class="topbar">
+                <img id="navbar_logo" src="{% static 'general/logosmall.jpg' %}" alt="Frenchay Fencing Logo">
+                <a id="title" href="{% url 'general-home' %}">Home</a>
+                <a id="anotherLink" href="{% url 'quote-home' %}">Quotes</a>
+            </div>
+    </div>
         
         <h3>This is the end of the general base file, content block after this</h3>
         
@@ -22,3 +24,4 @@
 
     </body>
 
+</html>
