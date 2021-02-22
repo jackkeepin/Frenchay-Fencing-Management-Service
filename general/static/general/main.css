@@ -1,5 +1,19 @@
+@font-face {
+  font-family: "FfFontMedium";
+  src: local("fontmedium"), url("./fonts/fontmedium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "FfFontRegular";
+  src: local("fontregular"), url("./fonts/fontregular.otf") format("opentype");
+}
+
 body {
   margin: 0;
+}
+
+* {
+  font-family: "FfFontRegular";
 }
 
 .topbar {
