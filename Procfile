@@ -1,0 +1,1 @@
+web: gunicorn fenchay_fencing_app.wsgi
