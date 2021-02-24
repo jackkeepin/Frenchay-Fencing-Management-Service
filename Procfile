@@ -1,1 +1,1 @@
-web: gunicorn fenchay_fencing_app.wsgi
+web: gunicorn frenchay_fencing_app.wsgi
