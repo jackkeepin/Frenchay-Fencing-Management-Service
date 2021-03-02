@@ -1,22 +1,19 @@
 from django.db import models
 
-# Create your models here.
+
 class Quote(models.Model):
     customer_first_name = models.CharField(max_length=50)
     customer_last_name = models.CharField(max_length=50)
-    address = {}
+    address = models.JSONField(null=True, blank=True)
     customer_email = models.EmailField()
-    materials = {}
+    materials = models.JSONField(null=True, blank=True)
     job_descripton = models.TextField()
+    dateOfJob = models.DateField()
     price_of_materials = models.DecimalField(decimal_places=2)
     removal_included = models.BooleanField(null=True, blank=True)
-    price_of_materials = models.DecimalField(decimal_places=2)
-    price_of_labour = models.DecimalField(decimal_places=2)
-    quote_price = models.DecimalField(decimal_places=2)
+    price_of_materials = models.DecimalField(decimal_places=2, max_digits=6)
+    price_of_labour = models.DecimalField(decimal_places=2, max_digits=6)
+    quote_price = models.DecimalField(decimal_places=2, max_digits=6)
     issued_by = models.CharField(max_length=255)
     issued_by_phone_num = models.CharField(max_length=15)
 
-class Address(models.Model):
-    address_line_one = models.CharField(max_length=1024)
-    city = models.CharField(max_length=1024)
-    postcode = models.CharField(max_length=10)
