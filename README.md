@@ -1,4 +1,4 @@
-https://img.shields.io/travis/com/jackkeepin/Frenchay-Fencing-Management-Service
+![Travis (.com)](https://img.shields.io/travis/com/jackkeepin/Frenchay-Fencing-Management-Service)
 
 # Frenchay Fencing Management Service
 
