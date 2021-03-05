@@ -17,3 +17,6 @@ class Quote(models.Model):
     issued_by = models.CharField(max_length=255)
     issued_by_phone_num = models.CharField(max_length=15)
 
+    def __str__(self):
+        return self.customer_first_name
+
