@@ -4,7 +4,7 @@ from quote.views import home, new_quote, view_quotes
 
 class TestUrls(SimpleTestCase):
 
-    def test_home_url_is_resolved(self):
+    def test_quote_home_url_is_resolved(self):
         url = reverse('quote-home')
         self.assertEquals(resolve(url).func, home)
 

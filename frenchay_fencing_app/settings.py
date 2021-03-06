@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+DEBUG_FLAG = os.environ.get('DEBUG_FLAG')
 DJANGO_SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DB_USER = os.environ.get('DB_USER')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
@@ -28,7 +29,7 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 SECRET_KEY = DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG_FLAG
 
 ALLOWED_HOSTS = ['localhost', 'frenchay-fencing-stg.herokuapp.com', 'frenchay-fencing.herokuapp.com']
 
@@ -80,19 +81,27 @@ WSGI_APPLICATION = 'frenchay_fencing_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'CLIENT' : {
-            'name': 'frenchayfencing',
-            'host': 'mongodb+srv://{DB_USER}:{DB_PASSWORD}@frenchayfencingapp.0x7xx.mongodb.net/frenchayfencing?retryWrites=true&w=majority',
-            'username': DB_USER,
-            'password': DB_PASSWORD,
-            'authMechanism': 'SCRAM-SHA-1'
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'test-db'
         }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'CLIENT' : {
+                'name': 'frenchayfencing',
+                'host': 'mongodb+srv://{DB_USER}:{DB_PASSWORD}@frenchayfencingapp.0x7xx.mongodb.net/frenchayfencing?retryWrites=true&w=majority',
+                'username': DB_USER,
+                'password': DB_PASSWORD,
+                'authMechanism': 'SCRAM-SHA-1'
+            },
+        },
+    }
 
 
 # Password validation
@@ -132,4 +141,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticrootfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')

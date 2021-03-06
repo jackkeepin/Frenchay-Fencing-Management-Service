@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from quote.models import Quote
 # from django.http import HttpResponse
 
 test_quotes = [
@@ -25,4 +26,9 @@ def new_quote(request):
     return render(request, 'quote/new_quote.html')
 
 def view_quotes(request):
-    return render(request, 'quote/view_quotes.html')
+    quotes = Quote.objects.all()
+    context = {
+        'quotes': quotes.values()
+    }
+    
+    return render(request, 'quote/view_quotes.html', context)

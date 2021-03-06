@@ -4,6 +4,15 @@
 
     <h2>View quotes page</h2>
     <p>This is where a list of all issued quotes will be dislayed</p>
-    <p>If this is working, nice</p>
+
+    {% for quote in quotes %}
+        <h3>{{ quote.customer_first_name }}</h2>
+        <h3>{{ quote.job_descripton }}</h2>
+
+        {% if quotes|length != forloop.counter %}
+            <h1>-------------------------------</h1>
+        {% endif %}
+
+    {% endfor %}
 
 {% endblock content %}
