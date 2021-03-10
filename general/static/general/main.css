@@ -30,12 +30,10 @@ body {
   color: #ffffff;
   text-decoration: none;
   padding: 1%;
-  /* box-sizing: border-box; */
-  /* max-height: inherit; */
 }
 
 .topbar a:hover {
-  background-color: #92e782;
+  color: #92e782;
   text-decoration: none;
 }
 
