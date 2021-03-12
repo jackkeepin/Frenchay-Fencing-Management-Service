@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from quote.models import Quote
-# from django.http import HttpResponse
+from quote.models import Quote, get_all_quotes, get_single_quote
+from django.http import HttpResponse
 
 test_quotes = [
     {
@@ -26,9 +26,15 @@ def new_quote(request):
     return render(request, 'quote/new_quote.html')
 
 def view_quotes(request):
-    quotes = Quote.objects.all()
+    quotes = get_all_quotes()
     context = {
-        'quotes': quotes.values()
+        'quotes': quotes
     }
     
     return render(request, 'quote/view_quotes.html', context)
+
+def view_quote(request, obj_id):
+    quote = get_single_quote(obj_id)
+    context = [vars(quote)]
+
+    return render(request, 'quote/view_quote.html', {'quote': context})

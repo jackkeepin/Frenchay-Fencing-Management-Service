@@ -1,22 +1,35 @@
 from django.db import models
+from djongo import models as djongomodels
+from bson import ObjectId
 
 
 class Quote(models.Model):
+    _id = djongomodels.ObjectIdField()
     customer_first_name = models.CharField(max_length=50)
     customer_last_name = models.CharField(max_length=50)
     address = models.TextField() #this used to be JSONField, find something else
     customer_email = models.EmailField()
     materials = models.TextField() #this used to be JSONField, find something else
     job_descripton = models.TextField()
-    dateOfJob = models.DateField()
+    date_of_job = models.DateField()
     price_of_materials = models.DecimalField(decimal_places=2)
     removal_included = models.BooleanField(null=True, blank=True)
-    price_of_materials = models.DecimalField(decimal_places=2, max_digits=6)
-    price_of_labour = models.DecimalField(decimal_places=2, max_digits=6)
-    quote_price = models.DecimalField(decimal_places=2, max_digits=6)
+    price_of_removal = models.DecimalField(decimal_places=2, max_digits=6, null=True)
+    price_of_materials = models.DecimalField(decimal_places=2, max_digits=6, null=True)
+    price_of_labour = models.DecimalField(decimal_places=2, max_digits=6, null=True)
+    quote_price = models.DecimalField(decimal_places=2, max_digits=6, null=True)
     issued_by = models.CharField(max_length=255)
     issued_by_phone_num = models.CharField(max_length=15)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.customer_first_name
 
+def get_all_quotes():
+    quotes = Quote.objects.all()
+    return quotes.values()
+
+def get_single_quote(object_id):
+    quoteresp = Quote.objects.get(_id=ObjectId(object_id))
+    return quoteresp
