@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Quote home page</h1>
+    <a href="{% url 'view-quotes' %}">View all quotes</a>
 
     {% for quote in quotes %}
         <h2>{{ quote.quoteId }}</h2>

@@ -27,6 +27,11 @@ def new_quote(request):
 
 def view_quotes(request):
     quotes = get_all_quotes()
+
+    #replace _id with id becasue leading underscore cannot be accessed
+    for item in quotes:
+        item['id'] = item.pop('_id')
+
     context = {
         'quotes': quotes
     }
@@ -35,6 +40,8 @@ def view_quotes(request):
 
 def view_quote(request, obj_id):
     quote = get_single_quote(obj_id)
-    context = [vars(quote)]
+    context = {
+        'quote': [vars(quote)]
+    }
 
-    return render(request, 'quote/view_quote.html', {'quote': context})
+    return render(request, 'quote/view_quote.html', context)
