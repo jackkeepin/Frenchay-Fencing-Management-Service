@@ -9,6 +9,9 @@
 
         <h3>{{ data.customer_first_name }}</h2>
         <h3>{{ data.job_descripton }}</h2>
+            {% for key, value in data.items %}
+                <b>{{ key }}: </b>{{ value }}
+            {% endfor %}
 
     {% endfor %}
 
