@@ -1,18 +1,40 @@
 {% extends "general/base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'quote/view_quotes_styles.css' %}">
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'quote/view_quotes_scripts.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 
-    <h2>View quotes page</h2>
-    <p>This is where a list of all issued quotes will be dislayed</p>
+    <table id="quoteTable">
+        <thead>
+            <tr>
+                <th>Customer name</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
 
-    {% for quote in quotes %}
-        <h3>{{ quote.customer_first_name }}</h2>
-        <h3>{{ quote.job_descripton }}</h2>
+        <tbody>
+        {% for quote in quotes %}
 
-        {% if quotes|length != forloop.counter %}
-            <h1>-------------------------------</h1>
-        {% endif %}
+            <tr data-href="view-quote/{{ quote.id }}">
+                <td data-label="Name">{{ quote.customer_first_name }} {{ quote.customer_last_name }}</td>
+                <td data-label="Description">{{ quote.job_descripton }}</td>
+                <td data-label="Address">{{ quote.address }}</td>
+                <td data-label="Date">{{ quote.date_of_job }}</td>
+                <td data-label="Action"><button onclick="document.location='view-quote/{{ quote.id }}'">View quote</button></td>
+            </tr>
 
-    {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock content %}
+

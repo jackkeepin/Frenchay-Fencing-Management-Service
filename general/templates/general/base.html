@@ -2,26 +2,45 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
 
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        
         <link rel="stylesheet" href="{% static 'general/main.css' %}">
+        {% block styles %}{% endblock %}
+        {% block scripts %}{% endblock %}
     
     </head>
 
     <body>
 
-        <div class="flex-container">
-            <div class="topbar">
-                <img id="navbar_logo" src="{% static 'general/logosmall.jpg' %}" alt="Frenchay Fencing Logo">
-                <a id="title" href="{% url 'general-home' %}">Home</a>
-                <a id="anotherLink" href="{% url 'quote-home' %}">Quotes</a>
-            </div>
-    </div>
+        <header>
+            <img src="{% static 'general/logosmall.jpg' %}" style="height: 60px; width: 200px; margin-right: 10px;">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+
+            <nav>
+                <ul>
+                    <li><a href="{% url 'general-home' %}">Home</a></li>
+                    <li><a href="{% url 'quote-home' %}">Quotes</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">More</a></li>
+                </ul>
+            </nav>
+
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+            </label>
+        </header>
+
         
         <h3>This is the end of the general base file, content block after this</h3>
         
         {% block content %}{% endblock %}
+
 
     </body>
 

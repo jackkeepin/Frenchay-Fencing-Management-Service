@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ['localhost', 'frenchay-fencing-stg.herokuapp.com', 'frenchay-fe
 INSTALLED_APPS = [
     'general.apps.GeneralConfig',
     'quote.apps.QuoteConfig',
+    'user.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,6 +76,13 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'user.User'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
+    'user.backend.CaseInsensitiveModelBackend'
+)
 
 WSGI_APPLICATION = 'frenchay_fencing_app.wsgi.application'
 
