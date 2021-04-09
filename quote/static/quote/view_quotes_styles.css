@@ -3,10 +3,14 @@ table {
   border-collapse: collapse;
   margin: 0;
   padding: 0;
-  margin-left: 5%;
-  margin-right: 5%;
   margin-top: 1%;
   table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#descriptionData {
+  max-width: 50vw;
 }
 
 table caption {

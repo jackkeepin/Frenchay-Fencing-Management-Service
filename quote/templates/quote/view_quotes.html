@@ -28,7 +28,7 @@
 
             <tr data-href="quote-details/{{ quote.id }}">
                 <td data-label="Name">{{ quote.customer_first_name }} {{ quote.customer_last_name }}</td>
-                <td data-label="Description">{{ quote.job_descripton }}</td>
+                <td data-label="Description" id="descriptionData">{{ quote.job_descripton }}</td>
                 <td data-label="Address">{{ quote.address }}</td>
                 <td data-label="Date">{{ quote.date_of_job }}</td>
                 <td data-label="Action"><button onclick="document.location='quote-details/{{ quote.id }}'">View quote</button></td>
