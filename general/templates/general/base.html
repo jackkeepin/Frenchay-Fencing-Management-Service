@@ -19,15 +19,15 @@
     <body>
 
         <header>
-            <img src="{% static 'general/logosmall.jpg' %}" style="height: 60px; width: 200px; margin-right: 10px;">
+            <a href="{% url 'general-home' %}"><img src="{% static 'general/logosmall.jpg' %}" style="height: 60px; width: 200px; margin-right: 10px;"></a>
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
 
             <nav>
                 <ul>
                     <li><a href="{% url 'general-home' %}">Home</a></li>
-                    <li><a href="{% url 'quote-home' %}">Quotes</a></li>
+                    <li><a href="{% url 'view-quotes' %}">Quotes</a></li>
                     <li><a href="#">Jobs</a></li>
-                    <li><a href="#">More</a></li>
+                    <li><a href="#">Login</a></li>
                 </ul>
             </nav>
 
@@ -35,12 +35,8 @@
                 <span></span>
             </label>
         </header>
-
-        
-        <h3>This is the end of the general base file, content block after this</h3>
         
         {% block content %}{% endblock %}
-
 
     </body>
 

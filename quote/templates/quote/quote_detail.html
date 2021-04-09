@@ -1,0 +1,16 @@
+{% extends "general/base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'quote/quote_details_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1>Quote details</h1>
+        
+
+    <h2><b>Name: </b> {{ object.customer_first_name }} {{ object.customer_last_name }}</h2>
+    <h2><b>Address: </b> {{ object.address }}</h2>
+
+{% endblock content %}
