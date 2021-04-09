@@ -1,6 +1,7 @@
 from django.db import models
 from djongo import models as djongomodels
 from bson import ObjectId
+from user.models import User
 
 
 class Quote(models.Model):
@@ -18,8 +19,7 @@ class Quote(models.Model):
     price_of_materials = models.DecimalField(decimal_places=2, max_digits=6, null=True)
     price_of_labour = models.DecimalField(decimal_places=2, max_digits=6, null=True)
     quote_price = models.DecimalField(decimal_places=2, max_digits=6, null=True)
-    issued_by = models.CharField(max_length=255)
-    issued_by_phone_num = models.CharField(max_length=15)
+    issued_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
