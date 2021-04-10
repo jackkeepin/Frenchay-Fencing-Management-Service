@@ -11,6 +11,55 @@
         
 
     <h2><b>Name: </b> {{ object.customer_first_name }} {{ object.customer_last_name }}</h2>
+    
     <h2><b>Address: </b> {{ object.address }}</h2>
+    
+    <h2><b>Date of job: </b> {{ object.date_of_job }}</h2>
+    
+    {% if object.customer_email == None %}
+        <h2><b>Customer email: </b> Not yet specified</h2>
+    {% else %}
+        <h2><b>Customer email: </b> {{ object.customer_email }}</h2>
+    {% endif %}
+
+    
+    <h2><b>Customer phone number: </b> {{ object.customer_phone_num }}</h2>
+    
+    <h2><b>Description: </b> {{ object.job_description }}</h2>
+    
+    <h2><b>Materials: </b> {{ object.materials }}</h2>
+
+    {% if object.price_of_materials == None %}
+        <h2><b>Price of materials: </b> Not yet specified</h2>
+    {% else %}
+        <h2><b>price of materials: </b> {{ object.price_of_materials }}</h2>
+    {% endif %}
+    
+    {% if object.removal_included == False %}
+        <h2><b>Removal included: </b> No</h2>
+    {% else %}
+        <h2><b>Removal included: </b> Yes</h2>
+        {% if object.price_of_removal == None %}
+            <h2><b>Price of removal: </b> Not yet specified</h2>
+        {% else %}
+            <h2><b>Price of removal: </b> {{ object.price_of_removal }}</h2>
+        {% endif %}
+    
+        {% endif %}
+    {% if object.price_of_labour == None %}
+        <h2><b>Price of labour: </b> Not yet specified</h2>
+    {% else %}
+        <h2><b>price of labour: </b> {{ object.price_of_labour }}</h2>
+    {% endif %}
+
+    {% if object.quote_price == None %}
+        <h2><b>Total quote price: </b> Not yet specified</h2>
+    {% else %}
+        <h2><b>Total quote price: </b> {{ object.quote_price }}</h2>
+    
+        {% endif %}
+    
+        <h2><b>Issued by: </b> {{ object.issued_by.first_name }}</h2>
+    
 
 {% endblock content %}
