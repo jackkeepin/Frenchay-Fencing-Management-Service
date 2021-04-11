@@ -135,3 +135,7 @@
     overflow-wrap: break-word;
   }
 }
+
+h2 {
+  font-size: large;
+}

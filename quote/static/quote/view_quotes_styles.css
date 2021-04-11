@@ -9,10 +9,6 @@ table {
   margin-right: auto;
 }
 
-#descriptionData {
-  max-width: 50vw;
-}
-
 table caption {
   font-size: 1.5em;
   margin: 0.5em 0 0.75em;
