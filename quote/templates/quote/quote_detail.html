@@ -9,57 +9,134 @@
 
     <h1>Quote details</h1>
         
+    <div class="grid-container" id="data-container">
 
-    <h2><b>Name: </b> {{ object.customer_first_name }} {{ object.customer_last_name }}</h2>
-    
-    <h2><b>Address: </b> {{ object.address }}</h2>
-    
-    <h2><b>Date of job: </b> {{ object.date_of_job }}</h2>
-    
-    {% if object.customer_email == None %}
-        <h2><b>Customer email: </b> Not yet specified</h2>
-    {% else %}
-        <h2><b>Customer email: </b> {{ object.customer_email }}</h2>
-    {% endif %}
+        <div class="name">
+            <h2><b>Name: </b></h2>
+        </div>
+        <div class="nameData">
+            <h2>{{ object.customer_first_name }} {{ object.customer_last_name }}</h2>
+        </div>
+            
 
-    
-    <h2><b>Customer phone number: </b> {{ object.customer_phone_num }}</h2>
-    
-    <h2><b>Description: </b> {{ object.job_description }}</h2>
-    
-    <h2><b>Materials: </b> {{ object.materials }}</h2>
+        <div class="address">
+            <h2><b>Address: </b></h2>
+        </div>
+        <div class="addressData">
+            <h2>{{ object.address }}</h2>
+        </div>
 
-    {% if object.price_of_materials == None %}
-        <h2><b>Price of materials: </b> Not yet specified</h2>
-    {% else %}
-        <h2><b>price of materials: </b> {{ object.price_of_materials }}</h2>
-    {% endif %}
-    
-    {% if object.removal_included == False %}
-        <h2><b>Removal included: </b> No</h2>
-    {% else %}
-        <h2><b>Removal included: </b> Yes</h2>
-        {% if object.price_of_removal == None %}
-            <h2><b>Price of removal: </b> Not yet specified</h2>
+
+        <div class="dateOfJob">
+            <h2><b>Date of job: </b></h2>
+        </div>
+        <div class="dateOfJobData">
+            <h2>{{ object.date_of_job }}</h2>
+        </div>
+
+
+        <div class="email">
+            <h2><b>Customer email: </b></h2>
+        </div>
+        <div class="emailData">
+            {% if object.customer_email == None %}
+                <h2>Not yet specified</h2>
+            {% else %}
+                <h2>{{ object.customer_email }}</h2>
+            {% endif %}
+        </div>
+
+        
+        <div class="phoneNum">
+            <h2><b>Customer phone number: </b></h2>
+        </div>
+        <div class="phoneNumData">
+            <h2> {{ object.customer_phone_num }}</h2>
+        </div>
+
+
+        <div class="description">
+            <h2><b>Description: </b></h2>
+        </div>
+        <div class="descriptionData">
+            <h2>{{ object.job_description }}</h2>
+        </div>
+        
+
+        <div class="materials">
+            <h2><b>Materials: </b></h2>
+        </div>
+        <div class="materialsData">
+            <h2>{{ object.materials }}</h2>
+        </div>
+        
+
+        <div class="priceOfMaterials">
+            <h2><b>Price of materials: </b></h2> 
+        </div>
+        <div class="priceOfMaterialsData">
+            {% if object.price_of_materials == None %}
+                <h2>Not yet specified</h2> 
+            {% else %}
+                <h2>{{ object.price_of_materials }}</h2>
+            {% endif %}
+        </div>
+
+
+        <div class="removalIncluded">
+            <h2><b>Removal included: </b></h2>
+        </div>
+        
+        {% if object.removal_included == False %}
+            <div class="removalIncludedData"><h2>No</h2></div>
         {% else %}
-            <h2><b>Price of removal: </b> {{ object.price_of_removal }}</h2>
-        {% endif %}
-    
-        {% endif %}
-    {% if object.price_of_labour == None %}
-        <h2><b>Price of labour: </b> Not yet specified</h2>
-    {% else %}
-        <h2><b>price of labour: </b> {{ object.price_of_labour }}</h2>
-    {% endif %}
+            <div class="removalIncludedData"><h2>Yes</h2></div>
 
-    {% if object.quote_price == None %}
-        <h2><b>Total quote price: </b> Not yet specified</h2>
-    {% else %}
-        <h2><b>Total quote price: </b> {{ object.quote_price }}</h2>
-    
+            <div class="priceOfRemoval">
+                <h2><b>Price of removal: </b></h2>
+            </div>
+            {% if object.price_of_removal == None %}
+                <div class="priceOfRemovalData">
+                    <h2>Not yet specified</h2>
+                </div>
+            {% else %}
+                <div class="priceOfRemovalData">
+                    <h2>{{ object.price_of_removal }}</h2>
+                </div>
+            {% endif %}
         {% endif %}
-    
-        <h2><b>Issued by: </b> {{ object.issued_by.first_name }}</h2>
-    
+        
 
+        <div class="priceOfLabour">
+            <h2><b>Price of labour: </b></h2>
+        </div>
+        <div class="priceOfLabourData">
+            {% if object.price_of_labour == None %}
+                <h2>Not yet specified</h2>
+            {% else %}
+                <h2>{{ object.price_of_labour }}</h2>
+            {% endif %}
+        </div>
+
+        
+        <div class="quotePrice">
+            <h2><b>Total quote price: </b></h2>
+        </div>
+        <div class="quotePriceData">
+            {% if object.quote_price == None %}
+                <h2>Not yet specified</h2>
+            {% else %}
+                <h2>{{ object.quote_price }}</h2>
+        {% endif %}
+        </div>
+        
+
+        <div class="issuedBy">
+            <h2><b>Issued by: </b></h2>
+        </div>
+        <div class="issuedByData">
+            <h2>{{ object.issued_by.first_name }}</h2>
+        </div>
+
+    </div>
 {% endblock content %}
