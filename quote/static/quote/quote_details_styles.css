@@ -134,4 +134,8 @@
     grid-template-rows: minmax(0.5%, 100%) repeat(2, 1fr);
     overflow-wrap: break-word;
   }
+
+  h2 {
+    font-size: large;
+  }
 }
