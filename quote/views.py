@@ -3,6 +3,7 @@ from quote.models import Quote, get_all_quotes, get_single_quote, QuoteForm
 from django.views.generic import DetailView, CreateView, DeleteView
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.urls import reverse_lazy
 
 test_quotes = [
     {
@@ -37,10 +38,6 @@ def view_quotes(request):
     paginator = Paginator(quotes, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-    # context = {
-    #     'quotes': quotes
-    # }
     
     return render(request, 'quote/view_quotes.html', {'page_obj': page_obj})
 
@@ -49,7 +46,10 @@ class QuoteDetailView(DetailView):
     model = Quote
 
     def get_object(self, queryset=None):
-        return get_single_quote(self.kwargs.get("obj_id"))
+        quote = vars(get_single_quote(self.kwargs.get('obj_id')))
+        quote['id'] = quote.pop('_id')
+        
+        return quote
 
 
 class QuoteCreateView(CreateView):
@@ -59,3 +59,15 @@ class QuoteCreateView(CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
+
+class QuoteDeleteView(DeleteView):
+    model = Quote
+    pk_url_kwarg = 'obj_id'
+    success_url = reverse_lazy('view-quotes')
+    
+    def get_object(self, queryset=None):
+        quote = get_single_quote(self.kwargs.get('obj_id'))
+        quote.id = quote._id
+        
+        return quote
+    
