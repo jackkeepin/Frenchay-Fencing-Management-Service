@@ -2,7 +2,7 @@ from django.db import models
 from djongo import models as djongomodels
 from bson import ObjectId
 from user.models import User
-
+from django.urls import reverse
 
 class Quote(models.Model):
     _id = djongomodels.ObjectIdField()
@@ -26,11 +26,16 @@ class Quote(models.Model):
 
     def __str__(self):
         return self.customer_first_name
+    
+    def get_absolute_url(self):
+        ##cannot redirect to just created obj because mongo ObjectId is assigned by db
+        return reverse('view-quotes')
 
 def get_all_quotes():
     quotes = Quote.objects.all()
     return quotes.values()
 
 def get_single_quote(object_id):
+    print(object_id)
     quoteresp = Quote.objects.get(_id=ObjectId(object_id))
     return quoteresp
