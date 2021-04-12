@@ -1,3 +1,28 @@
+#newQuoteButton {
+  font-size: large;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  background-color: #92e782;
+  border: solid;
+  border-width: 2px;
+  border-color: #72b366;
+  width: 125px;
+}
+
+#newQuoteButton:hover {
+  background-color: #72b366;
+}
+
+.pagination {
+  margin-top: 30px;
+  margin-bottom: 1%;
+}
+
+.wrapper {
+  text-align: center;
+}
+
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
@@ -7,10 +32,8 @@ table {
   table-layout: fixed;
   margin-left: auto;
   margin-right: auto;
-}
-
-#descriptionData {
-  max-width: 50vw;
+  min-width: 90%;
+  max-width: 90%;
 }
 
 table caption {
@@ -45,8 +68,15 @@ table th {
 }
 
 @media screen and (max-width: 800px) {
+  .pagination {
+    margin-top: 30px;
+    margin-bottom: 10%;
+  }
+
   table {
     border: 0;
+    min-width: 90%;
+    max-width: 90%;
   }
 
   table caption {

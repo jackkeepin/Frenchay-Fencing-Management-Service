@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from quote.models import Quote, get_all_quotes, get_single_quote
-from django.views.generic import DetailView
+from quote.models import Quote, get_all_quotes, get_single_quote, QuoteForm
+from django.views.generic import DetailView, CreateView, DeleteView
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 
 test_quotes = [
     {
@@ -32,25 +33,29 @@ def view_quotes(request):
     #replace _id with id becasue leading underscore cannot be accessed
     for item in quotes:
         item['id'] = item.pop('_id')
-
-    context = {
-        'quotes': quotes
-    }
     
-    return render(request, 'quote/view_quotes.html', context)
+    paginator = Paginator(quotes, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-# def view_quote(request, obj_id):
-#     quote = get_single_quote(obj_id)
-#     context = {
-#         'quote': [vars(quote)]
-#     }
-
-#     return render(request, 'quote/view_quote.html', context)
+    # context = {
+    #     'quotes': quotes
+    # }
+    
+    return render(request, 'quote/view_quotes.html', {'page_obj': page_obj})
 
 
 class QuoteDetailView(DetailView):
     model = Quote
-    # template_name = 'quote/quote_detail.html'
 
     def get_object(self, queryset=None):
         return get_single_quote(self.kwargs.get("obj_id"))
+
+
+class QuoteCreateView(CreateView):
+    model = Quote
+    form_class = QuoteForm
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
