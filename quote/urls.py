@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import QuoteDetailView, QuoteCreateView, QuoteDeleteView
+from .views import QuoteDetailView, QuoteCreateView
 from . import views
 
 urlpatterns = [
