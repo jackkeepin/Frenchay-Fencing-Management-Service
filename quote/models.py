@@ -3,6 +3,8 @@ from djongo import models as djongomodels
 from bson import ObjectId
 from user.models import User
 from django.urls import reverse
+from django.forms import ModelForm
+from django.forms.widgets import DateInput
 
 class Quote(models.Model):
     _id = djongomodels.ObjectIdField()
@@ -31,11 +33,34 @@ class Quote(models.Model):
         ##cannot redirect to just created obj because mongo ObjectId is assigned by db
         return reverse('view-quotes')
 
+
+class QuoteForm(ModelForm):
+
+    class Meta:
+        model = Quote
+        fields = [
+            'customer_first_name',
+            'customer_last_name',
+            'customer_phone_num',
+            'customer_email',
+            'date_of_job',
+            'job_description',
+            'materials',
+            'price_of_materials',
+            'removal_included',
+            'price_of_removal',
+            'price_of_labour',
+            'quote_price'
+        ]
+        widgets = {
+            'date_of_job': DateInput(attrs={'type': 'date'}),
+        }
+
+
 def get_all_quotes():
     quotes = Quote.objects.all()
     return quotes.values()
 
 def get_single_quote(object_id):
-    print(object_id)
     quoteresp = Quote.objects.get(_id=ObjectId(object_id))
     return quoteresp
