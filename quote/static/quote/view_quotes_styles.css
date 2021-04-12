@@ -6,8 +6,7 @@
   border: solid;
   border-width: 2px;
   border-color: #72b366;
-  width: 8%;
-  /* border-radius: 3px; */
+  width: 125px;
 }
 #newQuoteButton:hover {
   background-color: #72b366;
