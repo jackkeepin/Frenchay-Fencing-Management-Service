@@ -8,7 +8,7 @@
 {% block content %}
 
     <h1>Quote details</h1>
-        
+
     <div class="grid-container" id="data-container">
 
         <div class="name">
@@ -139,4 +139,6 @@
         </div>
 
     </div>
+
+    <a class="btn btn-outline-danger" href="{% url 'quote-delete' object.id %}">Delete</a>
 {% endblock content %}
