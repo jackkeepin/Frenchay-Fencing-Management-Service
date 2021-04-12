@@ -10,10 +10,10 @@ class Quote(models.Model):
     _id = djongomodels.ObjectIdField()
     customer_first_name = models.CharField(max_length=50)
     customer_last_name = models.CharField(max_length=50)
-    address = models.TextField() #this used to be JSONField, find something else
+    address = models.TextField()
     customer_email = models.EmailField(null=True, blank=True)
     customer_phone_num = models.CharField(max_length=15)
-    materials = models.TextField() #this used to be JSONField, find something else
+    materials = models.TextField()
     job_description = models.TextField()
     date_of_job = models.DateField()
     price_of_materials = models.DecimalField(decimal_places=2)
@@ -43,6 +43,7 @@ class QuoteForm(ModelForm):
             'customer_last_name',
             'customer_phone_num',
             'customer_email',
+            'address',
             'date_of_job',
             'job_description',
             'materials',
