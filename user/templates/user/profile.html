@@ -1,0 +1,11 @@
+{% extends "general/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'user/login_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+{% endblock content %}
