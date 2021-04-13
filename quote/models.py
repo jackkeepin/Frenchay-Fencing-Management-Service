@@ -13,11 +13,11 @@ class Quote(models.Model):
     address = models.TextField()
     customer_email = models.EmailField(null=True, blank=True)
     customer_phone_num = models.CharField(max_length=15)
-    materials = models.TextField()
+    materials = models.TextField(null=True, blank=True)
     job_description = models.TextField()
-    date_of_job = models.DateField()
+    date_of_job = models.DateField(null=True, blank=True)
     price_of_materials = models.DecimalField(decimal_places=2)
-    removal_included = models.BooleanField(default=False)
+    removal_included = models.BooleanField(default=False, null=True, blank=True)
     price_of_removal = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
     price_of_materials = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
     price_of_labour = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
@@ -27,7 +27,7 @@ class Quote(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.customer_first_name
+        return self.customer_first_name + " at " + self.address
     
     def get_absolute_url(self):
         ##cannot redirect to just created obj because mongo ObjectId is assigned by db
