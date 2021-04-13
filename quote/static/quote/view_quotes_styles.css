@@ -67,6 +67,13 @@ table th {
   text-align: center;
 }
 
+.page-btn {
+  margin-left: 5px;
+}
+.pagination {
+  display: inline-block;
+}
+
 @media screen and (max-width: 800px) {
   .pagination {
     margin-top: 30px;

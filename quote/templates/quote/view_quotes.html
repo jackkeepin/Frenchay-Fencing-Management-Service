@@ -42,6 +42,7 @@
         </tbody>
     </table>
 
+    
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
@@ -52,13 +53,21 @@
             <span class="current">
                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
             </span>
+
+            {% if page_obj.has_next == True or page_obj.has_previous == True %}
+                {% for num in page_obj.paginator.page_range %}
+                    <a class="btn btn-outline-info page-btn" href="?page={{ num }}">{{ num }}</a>
+                {% endfor %}
+            {% endif %}
     
             {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}">next</a>
                 <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
+
     </div>
+    
 
 {% endblock content %}
 
