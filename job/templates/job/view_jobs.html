@@ -2,46 +2,46 @@
 {% load static %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'quote/view_quotes_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'job/view_jobs_styles.css' %}">
 {% endblock %}
 {% block scripts %}
-    <script src="{% static 'quote/view_quotes_scripts.js' %}"></script>
+    <script src="{% static 'job/view_jobs_scripts.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-    <h1 style="text-align: center">Quotes</h1>
+    <h1 style="text-align: center">Jobs</h1>
 
-    <div class="wrapper">
-        <button id="newQuoteButton" onclick="document.location='new-quote'">New quote</button>
-    </div>
+    <!-- <div class="wrapper">
+        <button id="newJobButton" onclick="document.location='new-job'">New job</button>
+    </div> -->
 
-    <form method='GET' action="{% url 'view-quotes' %}">
+    <form method='GET' action="{% url 'view-jobs' %}">
         <input type='text' name='search' placeholder="Search">
         <button class="btn btn-outline-info" type="submit">Search</button>
-        <a class="btn btn-outline-info" href="{% url 'view-quotes' %}">Clear search</a>
+        <a class="btn btn-outline-info" href="{% url 'view-jobs' %}">Clear search</a>
     </form>
     
-    <table id="quoteTable">
+    <table id="jobTable">
         <thead>
             <tr>
                 <th>Customer name</th>
                 <th>Description</th>
                 <th>Address</th>
                 <th>Date</th>
-                <th>Action</th>
+                <!-- <th>Action</th> -->
             </tr>
         </thead>
 
         <tbody>
-        {% for quote in page_obj %}
+        {% for job in page_obj %}
 
-            <tr data-href="quote-details/{{ quote.id }}">
-                <td data-label="Name">{{ quote.customer_first_name }} {{ quote.customer_last_name }}</td>
-                <td data-label="Description" id="descriptionData">{{ quote.job_description }}</td>
-                <td data-label="Address">{{ quote.address }}</td>
-                <td data-label="Date">{{ quote.date_of_job }}</td>
-                <td data-label="Action"><button onclick="document.location='quote-details/{{ quote.id }}'">View quote</button></td>
+            <tr data-href="job-details/{{ job.id }}">
+                <td data-label="Name">{{ job.customer_first_name }} {{ job.customer_last_name }}</td>
+                <td data-label="Description" id="descriptionData">{{ job.job_description }}</td>
+                <td data-label="Address">{{ job.address }}</td>
+                <td data-label="Date">{{ job.date_of_job }}</td>
+                <!-- <td data-label="Action"><button onclick="document.location='job-details/{{ job.id }}'">View job</button></td> -->
             </tr>
 
         {% endfor %}

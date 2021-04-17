@@ -10,7 +10,7 @@ class Quote(models.Model):
     _id = djongomodels.ObjectIdField()
     customer_first_name = models.CharField(max_length=50)
     customer_last_name = models.CharField(max_length=50)
-    address = models.TextField()
+    address = models.CharField(max_length=1000)
     customer_email = models.EmailField(null=True, blank=True)
     customer_phone_num = models.CharField(max_length=15)
     materials = models.TextField(null=True, blank=True)
@@ -57,11 +57,3 @@ class QuoteForm(ModelForm):
             'date_of_job': DateInput(attrs={'type': 'date'}),
         }
 
-
-def get_all_quotes():
-    quotes = Quote.objects.all()
-    return quotes.values()
-
-def get_single_quote(object_id):
-    quoteresp = Quote.objects.get(_id=ObjectId(object_id))
-    return quoteresp

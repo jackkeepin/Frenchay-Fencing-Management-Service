@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['localhost', 'frenchay-fencing-stg.herokuapp.com', 'frenchay-fe
 # Application definition
 
 INSTALLED_APPS = [
+    'job.apps.JobConfig',
     'general.apps.GeneralConfig',
     'quote.apps.QuoteConfig',
     'user.apps.UserConfig',
