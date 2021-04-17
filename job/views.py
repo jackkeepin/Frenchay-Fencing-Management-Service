@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView
-from job.models import Job
+from django.views.generic import ListView, DetailView, UpdateView
+from job.models import Job, JobForm
 from job.services import get_all_jobs, get_single_job
 from django.db.models import Q
 
@@ -36,5 +36,19 @@ class JobDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         job = get_single_job(self.kwargs.get('obj_id'))
         job.id = job._id
-        
+
         return job
+
+
+class JobUpdateView(LoginRequiredMixin, UpdateView):
+    model = Job
+    form_class = JobForm
+    pk_url_kwarg = 'obj_id'
+
+    def get_object(self, queryset=None):
+        job = get_single_job(self.kwargs.get('obj_id'))
+        job.id = job._id
+        return job
+
+    def form_valid(self, form):
+        return super().form_valid(form)
