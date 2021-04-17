@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from quote.models import Quote, get_all_quotes, get_single_quote, QuoteForm
+from quote.models import Quote, QuoteForm
+from quote.services import get_all_quotes, get_single_quote
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 from django.http import HttpResponse
 from django.core.paginator import Paginator
@@ -47,6 +48,7 @@ class QuoteListView(LoginRequiredMixin, ListView):
             item.id = item._id
         
         return quotes
+
 
 class QuoteDetailView(LoginRequiredMixin, DetailView):
     model = Quote

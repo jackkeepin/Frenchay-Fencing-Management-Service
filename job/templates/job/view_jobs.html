@@ -1,0 +1,79 @@
+{% extends "general/base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'job/view_jobs_styles.css' %}">
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'job/view_jobs_scripts.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <h1 style="text-align: center">Jobs</h1>
+
+    <!-- <div class="wrapper">
+        <button id="newJobButton" onclick="document.location='new-job'">New job</button>
+    </div> -->
+
+    <form method='GET' action="{% url 'view-jobs' %}">
+        <input type='text' name='search' placeholder="Search">
+        <button class="btn btn-outline-info" type="submit">Search</button>
+        <a class="btn btn-outline-info" href="{% url 'view-jobs' %}">Clear search</a>
+    </form>
+    
+    <table id="jobTable">
+        <thead>
+            <tr>
+                <th>Customer name</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>Date</th>
+                <!-- <th>Action</th> -->
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for job in page_obj %}
+
+            <tr data-href="job-details/{{ job.id }}">
+                <td data-label="Name">{{ job.customer_first_name }} {{ job.customer_last_name }}</td>
+                <td data-label="Description" id="descriptionData">{{ job.job_description }}</td>
+                <td data-label="Address">{{ job.address }}</td>
+                <td data-label="Date">{{ job.date_of_job }}</td>
+                <!-- <td data-label="Action"><button onclick="document.location='job-details/{{ job.id }}'">View job</button></td> -->
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next == True or page_obj.has_previous == True %}
+                {% for num in page_obj.paginator.page_range %}
+                    <a class="btn btn-outline-info page-btn" href="?page={{ num }}">{{ num }}</a>
+                {% endfor %}
+            {% endif %}
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+
+    </div>
+    
+
+{% endblock content %}
+
