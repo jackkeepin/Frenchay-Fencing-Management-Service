@@ -18,7 +18,7 @@ class Job(models.Model):
     price_of_removal = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
     price_of_materials = models.DecimalField(decimal_places=2, max_digits=6)
     price_of_labour = models.DecimalField(decimal_places=2, max_digits=6)
-    quote_price = models.DecimalField(decimal_places=2, max_digits=6)
+    job_price = models.DecimalField(decimal_places=2, max_digits=6)
     issued_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

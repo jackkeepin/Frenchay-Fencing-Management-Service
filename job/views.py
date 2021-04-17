@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from job.models import Job
-from job.services import get_all_jobs
+from job.services import get_all_jobs, get_single_job
+from django.db.models import Q
 
-# Create your views here.
 class JobListView(LoginRequiredMixin, ListView):
     model = Job
     template_name = 'job/view_jobs.html'
@@ -17,7 +17,7 @@ class JobListView(LoginRequiredMixin, ListView):
 
         #if user enters search term
         if q is not None:
-            quotes = quotes.filter(
+            jobs = jobs.filter(
                 Q(customer_first_name__icontains=q) |
                 Q(customer_last_name__icontains=q) |
                 Q(address__icontains=q) |
@@ -28,3 +28,13 @@ class JobListView(LoginRequiredMixin, ListView):
             item.id = item._id
         
         return jobs
+
+
+class JobDetailView(LoginRequiredMixin, DetailView):
+    model = Job
+
+    def get_object(self, queryset=None):
+        job = get_single_job(self.kwargs.get('obj_id'))
+        job.id = job._id
+        
+        return job
