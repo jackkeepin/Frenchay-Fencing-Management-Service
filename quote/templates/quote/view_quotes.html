@@ -15,6 +15,12 @@
     <div class="wrapper">
         <button id="newQuoteButton" onclick="document.location='new-quote'">New quote</button>
     </div>
+
+    <form method='GET' action="{% url 'view-quotes' %}">
+        <input type='text' name='search' placeholder="Search">
+        <button class="btn btn-outline-info" type="submit">Search</button>
+        <a class="btn btn-outline-info" href="{% url 'view-quotes' %}">Clear search</a>
+    </form>
     
     <table id="quoteTable">
         <thead>
