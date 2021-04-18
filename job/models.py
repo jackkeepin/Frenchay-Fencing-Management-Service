@@ -2,26 +2,26 @@ from django.db import models
 from djongo import models as djongomodels
 from bson import ObjectId
 from user.models import User
-from django.urls import reverse
 from django.forms import ModelForm
 from django.forms.widgets import DateInput
+from django.urls import reverse
 
-class Quote(models.Model):
+class Job(models.Model):
     _id = djongomodels.ObjectIdField()
     customer_first_name = models.CharField(max_length=50)
     customer_last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=1000)
-    customer_email = models.EmailField(null=True, blank=True)
+    customer_email = models.EmailField()
     customer_phone_num = models.CharField(max_length=15)
-    materials = models.TextField(null=True, blank=True)
+    materials = models.TextField()
     job_description = models.TextField()
-    date_of_job = models.DateField(null=True, blank=True)
+    date_of_job = models.DateField()
     price_of_materials = models.DecimalField(decimal_places=2)
     removal_included = models.BooleanField(default=False, null=True, blank=True)
     price_of_removal = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
-    price_of_materials = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
-    price_of_labour = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
-    quote_price = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
+    price_of_materials = models.DecimalField(decimal_places=2, max_digits=6)
+    price_of_labour = models.DecimalField(decimal_places=2, max_digits=6)
+    job_price = models.DecimalField(decimal_places=2, max_digits=6)
     issued_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -30,14 +30,12 @@ class Quote(models.Model):
         return self.customer_first_name + " at " + self.address
     
     def get_absolute_url(self):
-        ##cannot redirect to just created obj because mongo ObjectId is assigned by db
-        return reverse('view-quotes')
+        return reverse('view-jobs')
 
-
-class QuoteForm(ModelForm):
+class JobForm(ModelForm):
 
     class Meta:
-        model = Quote
+        model = Job
         fields = [
             'customer_first_name',
             'customer_last_name',
@@ -51,7 +49,7 @@ class QuoteForm(ModelForm):
             'removal_included',
             'price_of_removal',
             'price_of_labour',
-            'quote_price'
+            'job_price'
         ]
         widgets = {
             'date_of_job': DateInput(attrs={'type': 'date'}),

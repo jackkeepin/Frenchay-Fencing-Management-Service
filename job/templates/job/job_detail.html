@@ -1,0 +1,145 @@
+{% extends "general/base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'job/job_details_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1>Job details</h1>
+
+    <div class="grid-container" id="data-container">
+
+        <div class="name">
+            <h2><b>Name: </b></h2>
+        </div>
+        <div class="nameData">
+            <h2>{{ object.customer_first_name }} {{ object.customer_last_name }}</h2>
+        </div>
+            
+
+        <div class="address">
+            <h2><b>Address: </b></h2>
+        </div>
+        <div class="addressData">
+            <h2>{{ object.address }}</h2>
+        </div>
+
+
+        <div class="dateOfJob">
+            <h2><b>Date of job: </b></h2>
+        </div>
+        <div class="dateOfJobData">
+            <h2>{{ object.date_of_job }}</h2>
+        </div>
+
+
+        <div class="email">
+            <h2><b>Customer email: </b></h2>
+        </div>
+        <div class="emailData">
+            {% if object.customer_email == None %}
+                <h2>Not yet specified</h2>
+            {% else %}
+                <h2>{{ object.customer_email }}</h2>
+            {% endif %}
+        </div>
+
+        
+        <div class="phoneNum">
+            <h2><b>Customer phone number: </b></h2>
+        </div>
+        <div class="phoneNumData">
+            <h2> {{ object.customer_phone_num }}</h2>
+        </div>
+
+
+        <div class="description">
+            <h2><b>Description: </b></h2>
+        </div>
+        <div class="descriptionData">
+            <h2>{{ object.job_description }}</h2>
+        </div>
+        
+
+        <div class="materials">
+            <h2><b>Materials: </b></h2>
+        </div>
+        <div class="materialsData">
+            <h2>{{ object.materials }}</h2>
+        </div>
+        
+
+        <div class="priceOfMaterials">
+            <h2><b>Price of materials: </b></h2> 
+        </div>
+        <div class="priceOfMaterialsData">
+            {% if object.price_of_materials == None %}
+                <h2>Not yet specified</h2> 
+            {% else %}
+                <h2>{{ object.price_of_materials }}</h2>
+            {% endif %}
+        </div>
+
+
+        <div class="removalIncluded">
+            <h2><b>Removal included: </b></h2>
+        </div>
+        
+        {% if object.removal_included == False %}
+            <div class="removalIncludedData"><h2>No</h2></div>
+        {% else %}
+            <div class="removalIncludedData"><h2>Yes</h2></div>
+
+            <div class="priceOfRemoval">
+                <h2><b>Price of removal: </b></h2>
+            </div>
+            {% if object.price_of_removal == None %}
+                <div class="priceOfRemovalData">
+                    <h2>Not yet specified</h2>
+                </div>
+            {% else %}
+                <div class="priceOfRemovalData">
+                    <h2>{{ object.price_of_removal }}</h2>
+                </div>
+            {% endif %}
+        {% endif %}
+        
+
+        <div class="priceOfLabour">
+            <h2><b>Price of labour: </b></h2>
+        </div>
+        <div class="priceOfLabourData">
+            {% if object.price_of_labour == None %}
+                <h2>Not yet specified</h2>
+            {% else %}
+                <h2>{{ object.price_of_labour }}</h2>
+            {% endif %}
+        </div>
+
+        
+        <div class="jobPrice">
+            <h2><b>Total job price: </b></h2>
+        </div>
+        <div class="jobPriceData">
+            {% if object.job_price == None %}
+                <h2>Not yet specified</h2>
+            {% else %}
+                <h2>{{ object.job_price }}</h2>
+        {% endif %}
+        </div>
+        
+
+        <div class="issuedBy">
+            <h2><b>Issued by: </b></h2>
+        </div>
+        <div class="issuedByData">
+            <h2>{{ object.issued_by.first_name }}</h2>
+        </div>
+
+    </div>
+
+    <a class="btn btn-outline-danger" href="{% url 'job-delete' object.id %}">Delete</a>
+    <a class="btn btn-secondary" href="{% url 'job-update' object.id %}">Edit</a>
+{% endblock content %}
