@@ -65,6 +65,8 @@ class QuoteCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.issued_by = self.request.user
+        form.instance.address = form.cleaned_data['address']
+
         return super().form_valid(form)
 
 
