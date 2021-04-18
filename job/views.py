@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from job.models import Job, JobForm
 from job.services import get_all_jobs, get_single_job
 from django.db.models import Q
+from django.urls import reverse_lazy
 
 class JobListView(LoginRequiredMixin, ListView):
     model = Job
@@ -52,3 +53,16 @@ class JobUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
+
+class JobDeleteView(LoginRequiredMixin, DeleteView):
+    model = Job
+    pk_url_kwarg = 'obj_id'
+    success_url = reverse_lazy('view-jobs')
+    
+    def get_object(self, queryset=None):
+        job = get_single_job(self.kwargs.get('obj_id'))
+        job.id = job._id
+        
+        return job
+    
