@@ -1,0 +1,141 @@
+#data-container {
+  margin-left: 2%;
+  /* max-width: 100vw; */
+  /* margin-right: 15%; */
+}
+
+.name {
+  grid-area: customerName;
+}
+.nameData {
+  grid-area: customerNameData;
+}
+.address {
+  grid-area: customerAddress;
+}
+.addressData {
+  grid-area: customerAddressData;
+}
+.email {
+  grid-area: customerEmail;
+}
+.emailData {
+  grid-area: customerEmailData;
+}
+.phoneNum {
+  grid-area: customerNumber;
+}
+.phoneNumData {
+  grid-area: customerNumberData;
+}
+.dateOfJob {
+  grid-area: jobDate;
+}
+.dateOfJobData {
+  grid-area: jobDateData;
+}
+.description {
+  grid-area: jobDescription;
+}
+.descriptionData {
+  grid-area: jobDescriptionData;
+}
+.materials {
+  grid-area: material;
+}
+.materialsData {
+  grid-area: materialData;
+}
+.priceOfMaterials {
+  grid-area: materialPrice;
+}
+.priceOfMaterialsData {
+  grid-area: materialPriceData;
+}
+.removalIncuded {
+  grid-area: removal;
+}
+.removalIncudedData {
+  grid-area: removalData;
+}
+.priceOfRemoval {
+  grid-area: removalPrice;
+}
+.priceOfRemovalData {
+  grid-area: removalPriceData;
+}
+.priceOfLabour {
+  grid-area: priceLabour;
+}
+.priceOfLabourData {
+  grid-area: priceLabourData;
+}
+.jobPrice {
+  grid-area: priceJob;
+}
+.jobPriceData {
+  grid-area: priceJobData;
+}
+.issuedBy {
+  grid-area: issued;
+}
+.issuedByData {
+  grid-area: issuedData;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "customerName customerNameData customerNameData customerNameData customerNameData"
+    "customerAddress customerAddressData customerAddressData customerAddressData customerAddressData"
+    "customerNumber customerNumberData customerNumberData customerNumberData customerNumberData"
+    "customerEmail customerEmailData customerEmailData customerEmailData customerEmailData"
+    "jobDate jobDateData jobDateData jobDateData jobDateData"
+    "jobDescription jobDescriptionData jobDescriptionData jobDescriptionData jobDescriptionData"
+    "material materialData materialData materialData materialData"
+    "materialPrice materialPriceData materialPriceData materialPriceData materialPriceData"
+    "removal removalData removalData removalData removalData"
+    "removalPrice removalPriceData removalPriceData removalPriceData removalPriceData"
+    "priceLabour priceLabourData priceLabourData priceLabourData priceLabourData"
+    "priceJob priceJobData priceJobData priceJobData priceJobData"
+    "issued issuedData issuedData issuedData issuedData";
+  grid-gap: 10px;
+  padding: 10px;
+  grid-template-columns: repeat(2, 500px) 30px;
+  grid-template-rows: minmax(0.5%, 100%) repeat(2, 1fr);
+  overflow-wrap: break-word;
+}
+
+.grid-container > div {
+  text-align: left;
+  padding: 10px 0;
+}
+
+@media screen and (max-width: 800px) {
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      "customerName customerNameData customerNameData customerNameData customerNameData"
+      "customerAddress customerAddressData customerAddressData customerAddressData customerAddressData"
+      "customerNumber customerNumberData customerNumberData customerNumberData customerNumberData"
+      "customerEmail customerEmailData customerEmailData customerEmailData customerEmailData"
+      "jobDate jobDateData jobDateData jobDateData jobDateData"
+      "jobDescription jobDescriptionData jobDescriptionData jobDescriptionData jobDescriptionData"
+      "material materialData materialData materialData materialData"
+      "materialPrice materialPriceData materialPriceData materialPriceData materialPriceData"
+      "removal removalData removalData removalData removalData"
+      "removalPrice removalPriceData removalPriceData removalPriceData removalPriceData"
+      "priceLabour priceLabourData priceLabourData priceLabourData priceLabourData"
+      "priceJob priceJobData priceJobData priceJobData priceJobData"
+      "issued issuedData issuedData issuedData issuedData";
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-columns: repeat(2, 1fr) 30px;
+    grid-template-rows: minmax(0.5%, 100%) repeat(2, 1fr);
+    overflow-wrap: break-word;
+  }
+
+  h2 {
+    font-size: large;
+  }
+}
