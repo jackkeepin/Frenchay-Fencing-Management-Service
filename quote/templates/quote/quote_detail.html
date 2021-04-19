@@ -149,9 +149,7 @@
 
     </div>
 
-    <div id="createJobError">
-        <h3>You must fill out all fields before you can create a job!</h3>
-    </div>
+    <div id="createJobError"></div>
 
     <a class="btn btn-outline-danger" href="{% url 'quote-delete' object.id %}">Delete</a>
     <a class="btn btn-secondary" href="{% url 'quote-update' object.id %}">Edit</a>
@@ -162,12 +160,20 @@
 
         $("#createJobButton").click(function() {
             $.post("/quote/create-job", {'data': '{{object.id}}'}, function(data) {
-                if (data['status'] == 'Error') {
+                if (data['error']) {
+                    let error_msg = ""
+
+                    if ('address' in data['error'] == true) {
+                        error_msg = "<h3>A job at this address already exists!</h3>"
+                    }
+                    else {
+                        error_msg = "<h3>You must fill out all fields before you can create a job!</h3>"
+                    }
+                    $('#createJobError').html(error_msg);
                     $('#createJobError').show();
                 }
                 else {
                     window.location.href = data['success'];
-                    
                 }
             });
         });

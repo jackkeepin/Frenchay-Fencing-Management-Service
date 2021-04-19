@@ -6,13 +6,12 @@ from quote.services import get_all_quotes, get_single_quote, create_job_with_quo
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
-# from django.core.urlresolvers import reverse
 from django.urls import reverse_lazy, reverse
 from user.models import User
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from job.models import Job
-from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
+from django.core.exceptions import ValidationError
 
 @login_required
 def view_quotes(request):
@@ -45,9 +44,7 @@ def create_job(request):
             return JsonResponse(data)
 
         except ValidationError as err:
-            print(err.message_dict)
-            print(err.message[NON_FIELD_ERRORS])
-            data = {'status': 'Error'}
+            data = {'error': err.message_dict}
             return JsonResponse(data)
             
 

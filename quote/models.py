@@ -11,7 +11,7 @@ class Quote(models.Model):
     _id = djongomodels.ObjectIdField()
     customer_first_name = models.CharField(max_length=50)
     customer_last_name = models.CharField(max_length=50)
-    address = models.CharField(max_length=1000)
+    address = models.CharField(max_length=1000, unique=True)
     customer_email = models.EmailField(null=True, blank=True)
     customer_phone_num = models.CharField(max_length=15)
     materials = models.TextField(null=True, blank=True)
