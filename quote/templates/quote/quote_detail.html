@@ -162,13 +162,12 @@
 
         $("#createJobButton").click(function() {
             $.post("/quote/create-job", {'data': '{{object.id}}'}, function(data) {
-                console.log(data)
                 if (data['status'] == 'Error') {
-                    console.log('there is an error')
                     $('#createJobError').show();
                 }
                 else {
-                    console.log("no error")
+                    window.location.href = data['success'];
+                    
                 }
             });
         });

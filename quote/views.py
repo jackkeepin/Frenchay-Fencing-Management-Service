@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from quote.models import Quote, QuoteForm
@@ -6,12 +6,13 @@ from quote.services import get_all_quotes, get_single_quote, create_job_with_quo
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
-from django.urls import reverse_lazy
+# from django.core.urlresolvers import reverse
+from django.urls import reverse_lazy, reverse
 from user.models import User
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from job.models import Job
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 
 @login_required
 def view_quotes(request):
@@ -31,26 +32,24 @@ def view_quotes(request):
 def create_job(request):
 
     if request.is_ajax():
-        dat = {'output': 'hey nice'}
-        # print(request.POST.get('data'))
         quote_id = request.POST.get('data')
         quote = get_single_quote(quote_id)
-        print(quote)
 
-        #create job object here, save to db and redirect
         job = create_job_with_quote(quote)
-        print(job)
 
         try:
             job.full_clean()
+            job.save()
+            url = reverse('view-jobs')
+            data = {'success': url}
+            return JsonResponse(data)
+
         except ValidationError as err:
             print(err.message_dict)
+            print(err.message[NON_FIELD_ERRORS])
             data = {'status': 'Error'}
             return JsonResponse(data)
             
-        return JsonResponse(dat)
-
-    # return HttpResponse(request)
 
 
 class QuoteListView(LoginRequiredMixin, ListView):
