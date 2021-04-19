@@ -115,6 +115,7 @@ class QuoteUpdateView(LoginRequiredMixin, UpdateView):
         return quote
 
     def form_valid(self, form):
+        form.instance.address = form.cleaned_data['address']
         return super().form_valid(form)
 
 

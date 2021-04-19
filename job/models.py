@@ -2,7 +2,7 @@ from django.db import models
 from djongo import models as djongomodels
 from bson import ObjectId
 from user.models import User
-from django.forms import ModelForm
+from django.forms import ModelForm, CharField
 from django.forms.widgets import DateInput
 from django.urls import reverse
 
@@ -33,6 +33,18 @@ class Job(models.Model):
 
 class JobForm(ModelForm):
 
+    street = CharField()
+    city = CharField()
+    post_code = CharField()
+
+    def clean(self):
+       street = self.cleaned_data['street']
+       city = self.cleaned_data['city']
+       post_code = self.cleaned_data['post_code']
+       self.cleaned_data['address'] = street + ', ' + city + ', ' + post_code
+
+       return self.cleaned_data
+
     class Meta:
         model = Job
         fields = [
@@ -40,7 +52,6 @@ class JobForm(ModelForm):
             'customer_last_name',
             'customer_phone_num',
             'customer_email',
-            'address',
             'date_of_job',
             'job_description',
             'materials',
