@@ -50,8 +50,19 @@ class JobUpdateView(LoginRequiredMixin, UpdateView):
         job = get_single_job(self.kwargs.get('obj_id'))
         job.id = job._id
         return job
+    
+    def get_initial(self):
+        job = get_single_job(self.kwargs.get('obj_id'))
+        job = vars(job)
+        address = job['address']
+        split_address = address.split(',')
+        job['street'] = split_address[0].lstrip()
+        job['city'] = split_address[1].lstrip()
+        job['post_code'] = split_address[2].lstrip()
+        return job
 
     def form_valid(self, form):
+        form.instance.address = form.cleaned_data['address']
         return super().form_valid(form)
 
 

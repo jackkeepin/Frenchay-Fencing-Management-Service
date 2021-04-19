@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'quote/quote_details_styles.css' %}">
 {% endblock %}
 
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
     <h1>Quote details</h1>
@@ -67,7 +71,12 @@
             <h2><b>Materials: </b></h2>
         </div>
         <div class="materialsData">
-            <h2>{{ object.materials }}</h2>
+            {% if not object.materials %}
+                <h2>Not yet specified</h2>
+            {% else %}
+                <h2>{{ object.materials }}</h2>
+            {% endif %}
+            
         </div>
         
 
@@ -140,6 +149,34 @@
 
     </div>
 
+    <div id="createJobError"></div>
+
     <a class="btn btn-outline-danger" href="{% url 'quote-delete' object.id %}">Delete</a>
     <a class="btn btn-secondary" href="{% url 'quote-update' object.id %}">Edit</a>
+
+    <button id="createJobButton" type="button" class="btn btn-secondary">Create Job</button>
+
+    <script>
+
+        $("#createJobButton").click(function() {
+            $.post("/quote/create-job", {'data': '{{object.id}}'}, function(data) {
+                if (data['error']) {
+                    let error_msg = ""
+
+                    if ('address' in data['error'] == true) {
+                        error_msg = "<h3>A job at this address already exists!</h3>"
+                    }
+                    else {
+                        error_msg = "<h3>You must fill out all fields before you can create a job!</h3>"
+                    }
+                    $('#createJobError').html(error_msg);
+                    $('#createJobError').show();
+                }
+                else {
+                    window.location.href = data['success'];
+                }
+            });
+        });
+
+    </script>
 {% endblock content %}
