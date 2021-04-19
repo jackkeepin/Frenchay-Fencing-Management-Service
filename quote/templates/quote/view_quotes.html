@@ -16,63 +16,68 @@
         <button id="newQuoteButton" onclick="document.location='new-quote'">New quote</button>
     </div>
 
-    <form method='GET' action="{% url 'view-quotes' %}">
-        <input type='text' name='search' placeholder="Search">
-        <button class="btn btn-outline-info" type="submit">Search</button>
-        <a class="btn btn-outline-info" href="{% url 'view-quotes' %}">Clear search</a>
-    </form>
-    
-    <table id="quoteTable">
-        <thead>
-            <tr>
-                <th>Customer name</th>
-                <th>Description</th>
-                <th>Address</th>
-                <th>Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+    {% if page_obj|length == 0 %}
+        <h2 style="text-align: center;">No quotes to display!</h2>
+    {% else %}
 
-        <tbody>
-        {% for quote in page_obj %}
+        <form method='GET' action="{% url 'view-quotes' %}">
+            <input type='text' name='search' placeholder="Search">
+            <button class="btn btn-outline-info" type="submit">Search</button>
+            <a class="btn btn-outline-info" href="{% url 'view-quotes' %}">Clear search</a>
+        </form>
+        
+        <table id="quoteTable">
+            <thead>
+                <tr>
+                    <th>Customer name</th>
+                    <th>Description</th>
+                    <th>Address</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-            <tr data-href="quote-details/{{ quote.id }}">
-                <td data-label="Name">{{ quote.customer_first_name }} {{ quote.customer_last_name }}</td>
-                <td data-label="Description" id="descriptionData">{{ quote.job_description }}</td>
-                <td data-label="Address">{{ quote.address }}</td>
-                <td data-label="Date">{{ quote.date_of_job }}</td>
-                <td data-label="Action"><button onclick="document.location='quote-details/{{ quote.id }}'">View quote</button></td>
-            </tr>
+            <tbody>
+            {% for quote in page_obj %}
 
-        {% endfor %}
-        </tbody>
-    </table>
+                <tr data-href="quote-details/{{ quote.id }}">
+                    <td data-label="Name">{{ quote.customer_first_name }} {{ quote.customer_last_name }}</td>
+                    <td data-label="Description" id="descriptionData">{{ quote.job_description }}</td>
+                    <td data-label="Address">{{ quote.address }}</td>
+                    <td data-label="Date">{{ quote.date_of_job }}</td>
+                    <td data-label="Action"><button onclick="document.location='quote-details/{{ quote.id }}'">View quote</button></td>
+                </tr>
 
-    
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
-    
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            {% endfor %}
+            </tbody>
+        </table>
+
+        
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next == True or page_obj.has_previous == True %}
+                    {% for num in page_obj.paginator.page_range %}
+                        <a class="btn btn-outline-info page-btn" href="?page={{ num }}">{{ num }}</a>
+                    {% endfor %}
+                {% endif %}
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
             </span>
 
-            {% if page_obj.has_next == True or page_obj.has_previous == True %}
-                {% for num in page_obj.paginator.page_range %}
-                    <a class="btn btn-outline-info page-btn" href="?page={{ num }}">{{ num }}</a>
-                {% endfor %}
-            {% endif %}
-    
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-
-    </div>
+        </div>
+    {% endif %}
     
 
 {% endblock content %}
