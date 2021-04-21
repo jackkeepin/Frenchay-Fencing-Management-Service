@@ -140,6 +140,31 @@
 
     </div>
 
+    <div id="sendEmailFeedback"></div>
+
     <a class="btn btn-outline-danger" href="{% url 'job-delete' object.id %}">Delete</a>
     <a class="btn btn-secondary" href="{% url 'job-update' object.id %}">Edit</a>
+
+    <button id="sendInvoiceButton" type="button" class="btn btn-secondary">Send Invoice</button>
+
+    <script>
+
+        $("#sendInvoiceButton").click(function() {
+            $.post("/job/send-invoice", {'data': '{{object.id}}'}, function(data) {
+                if (data['status'] == 'error') {
+                    let error_msg = "Failed to send email";
+
+                    $('#sendEmailFeedback').html(error_msg);
+                    $('#sendEmailFeedback').show();
+                }
+                else {
+                    let success_msg = "Invoice sent sucessfully";
+
+                    $('#sendEmailFeedback').html(error_msg);
+                    $('#sendEmailFeedback').show();
+                }
+            });
+        });
+
+    </script>
 {% endblock content %}
