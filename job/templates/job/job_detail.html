@@ -144,7 +144,15 @@
 
     </div>
 
-    <div id="sendEmailFeedback"></div>
+
+    <div class="flex-container">
+        <h1 id="sendingEmail">Sending email... &nbsp; </h1>
+        <div class=" loader"></div>
+    </div>
+
+
+    <div id="sendEmailError"></div>
+    <div id="sendEmailSuccess"></div>
 
     <a class="btn btn-outline-danger" href="{% url 'job-delete' object.id %}">Delete</a>
     <a class="btn btn-secondary" href="{% url 'job-update' object.id %}">Edit</a>
@@ -154,18 +162,25 @@
     <script>
 
         $("#sendInvoiceButton").click(function() {
-            $.post("/job/send-invoice", {'data': '{{object.id}}'}, function(data) {
-                if (data['status'] == 'error') {
-                    let error_msg = "Failed to send email";
+            // show loading message
+            $('.loader').show();
+            $('#sendingEmail').show();
 
-                    $('#sendEmailFeedback').html(error_msg);
-                    $('#sendEmailFeedback').show();
+            $.post("/job/send-invoice", {'data': '{{object.id}}'}, function(data) {
+                // hide loading message
+                $('.loader').hide();
+                $('#sendingEmail').hide();
+                if (data['status'] == 'error') {
+                    let error_msg = "<h3 id='emailFeedback'>Failed to send email. Please check the customer email is correct.</h3>";
+
+                    $('#sendEmailError').html(error_msg);
+                    $('#sendEmailError').show();
                 }
                 else {
-                    let success_msg = "Invoice sent sucessfully";
+                    let success_msg = "<h3 id='emailFeedback'>Invoice sent sucessfully</h3>";
 
-                    $('#sendEmailFeedback').html(success_msg);
-                    $('#sendEmailFeedback').show();
+                    $('#sendEmailSuccess').html(success_msg);
+                    $('#sendEmailSuccess').show();
                 }
             });
         });

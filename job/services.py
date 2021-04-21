@@ -43,8 +43,9 @@ def add_data(job):
         letter_address_data = os.environ.get('OWNER1_DETAILS')
     elif job['issued_by_name'] == "Andy":
         letter_address_data = os.environ.get('OWNER2_DETAILS')
-    #else:
-        # do something here
+    else:
+        letter_address_data = '{"business": "Frenchay Fencing"}'
+    
     
     letter_address_data = json.loads(letter_address_data)
     
