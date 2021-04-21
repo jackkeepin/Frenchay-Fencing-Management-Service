@@ -38,10 +38,12 @@ def add_data(job):
     document.append(get_image('./general/static/general/logosmall.jpg', width=8*cm))
     document.append(Spacer(1, 30))
 
-    if job['issued_by_name'] == 'Mike':
+    if job['issued_by_name'] == 'Michael':
         letter_address_data = os.environ.get('OWNER1_DETAILS')
     elif job['issued_by_name'] == "Andy":
         letter_address_data = os.environ.get('OWNER2_DETAILS')
+    #else:
+        # do something here
     
     for key, value in letter_address_data.items():
         document.append(Paragraph(value, addressStyle))
