@@ -2,9 +2,42 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from job.models import Job, JobForm
-from job.services import get_all_jobs, get_single_job
+from job.services import get_all_jobs, get_single_job, create_pdf
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.core.mail import send_mail, EmailMessage
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from smtplib import SMTPException
+import json
+import os
+
+
+@csrf_exempt
+def send_invoice(request):
+    if request.is_ajax():
+        job_id = request.POST.get('data')
+        job = get_single_job(job_id)
+
+        job.issued_by_name = job.issued_by.first_name
+        job_dict = vars(job)
+
+        pdf = create_pdf(job_dict)
+
+        email = EmailMessage(
+            subject='Frenchay Fencing Invoice',
+            body='Please find attached your invoice.',
+            from_email=os.environ.get('EMAIL_USER'),
+            to=job.customer_email
+        )
+        email.attach('invoice.pdf', pdf, 'application/pdf')
+        try:
+            email.send()
+            return JsonResponse( {'status': 'success'} )
+        except SMTPException as err:
+            return JsonResponse( {'status': 'error'})
+
+
 
 class JobListView(LoginRequiredMixin, ListView):
     model = Job

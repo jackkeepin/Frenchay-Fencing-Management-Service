@@ -111,6 +111,15 @@
   padding: 10px 0;
 }
 
+#sendEmailFeedback {
+  display: none;
+  text-align: center;
+  background-color: #b86566;
+  border-color: #a15d5e;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
 @media screen and (max-width: 800px) {
   .grid-container {
     display: grid;
@@ -137,5 +146,14 @@
 
   h2 {
     font-size: large;
+  }
+
+  #sendEmailFeedback {
+    display: none;
+    text-align: center;
+    background-color: #b86566;
+    border-color: #a15d5e;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 }
