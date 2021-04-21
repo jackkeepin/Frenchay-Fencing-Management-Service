@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'job/job_details_styles.css' %}">
 {% endblock %}
 
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
     <h1>Job details</h1>
@@ -160,7 +164,7 @@
                 else {
                     let success_msg = "Invoice sent sucessfully";
 
-                    $('#sendEmailFeedback').html(error_msg);
+                    $('#sendEmailFeedback').html(success_msg);
                     $('#sendEmailFeedback').show();
                 }
             });
