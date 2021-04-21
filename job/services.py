@@ -46,7 +46,7 @@ def add_data(job):
     #else:
         # do something here
     
-    letter_address_data = json.loads(letter)
+    letter_address_data = json.loads(letter_address_data)
     
     for key, value in letter_address_data.items():
         document.append(Paragraph(value, addressStyle))
