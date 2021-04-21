@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'job/job_details_styles.css' %}">
 {% endblock %}
 
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
     <h1>Job details</h1>
@@ -140,6 +144,46 @@
 
     </div>
 
+
+    <div class="flex-container">
+        <h1 id="sendingEmail">Sending email... &nbsp; </h1>
+        <div class=" loader"></div>
+    </div>
+
+
+    <div id="sendEmailError"></div>
+    <div id="sendEmailSuccess"></div>
+
     <a class="btn btn-outline-danger" href="{% url 'job-delete' object.id %}">Delete</a>
     <a class="btn btn-secondary" href="{% url 'job-update' object.id %}">Edit</a>
+
+    <button id="sendInvoiceButton" type="button" class="btn btn-secondary">Send Invoice</button>
+
+    <script>
+
+        $("#sendInvoiceButton").click(function() {
+            // show loading message
+            $('.loader').show();
+            $('#sendingEmail').show();
+
+            $.post("/job/send-invoice", {'data': '{{object.id}}'}, function(data) {
+                // hide loading message
+                $('.loader').hide();
+                $('#sendingEmail').hide();
+                if (data['status'] == 'error') {
+                    let error_msg = "<h3 id='emailFeedback'>Failed to send email. Please check the customer email is correct.</h3>";
+
+                    $('#sendEmailError').html(error_msg);
+                    $('#sendEmailError').show();
+                }
+                else {
+                    let success_msg = "<h3 id='emailFeedback'>Invoice sent sucessfully</h3>";
+
+                    $('#sendEmailSuccess').html(success_msg);
+                    $('#sendEmailSuccess').show();
+                }
+            });
+        });
+
+    </script>
 {% endblock content %}
