@@ -10,6 +10,7 @@ from reportlab.lib.enums import TA_RIGHT
 from io import StringIO, BytesIO
 import re
 import os
+import json
 
 def get_all_jobs():
     jobs = Job.objects.all().order_by('date_of_job')
@@ -44,6 +45,8 @@ def add_data(job):
         letter_address_data = os.environ.get('OWNER2_DETAILS')
     #else:
         # do something here
+    
+    letter_address_data = json.loads(letter)
     
     for key, value in letter_address_data.items():
         document.append(Paragraph(value, addressStyle))
