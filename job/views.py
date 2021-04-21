@@ -28,7 +28,7 @@ def send_invoice(request):
             subject='Frenchay Fencing Invoice',
             body='Please find attached your invoice.',
             from_email=os.environ.get('EMAIL_USER'),
-            to=job.customer_email
+            to=[job.customer_email]
         )
         email.attach('invoice.pdf', pdf, 'application/pdf')
         try:
