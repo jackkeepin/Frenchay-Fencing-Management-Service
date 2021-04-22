@@ -38,16 +38,20 @@ def add_data(job):
     document = []
     document.append(get_image('./general/static/general/logosmall.jpg', width=8*cm))
     document.append(Spacer(1, 30))
+    
+    split_address = job['issued_by_address'].split(',')
+    street = split_address[0].lstrip()
+    city = split_address[1].lstrip()
+    post_code = split_address[2].lstrip()
 
-    if job['issued_by_name'] == 'Michael':
-        letter_address_data = os.environ.get('OWNER1_DETAILS')
-    elif job['issued_by_name'] == "Andy":
-        letter_address_data = os.environ.get('OWNER2_DETAILS')
-    else:
-        letter_address_data = '{"business": "Frenchay Fencing"}'
-    
-    
-    letter_address_data = json.loads(letter_address_data)
+    letter_address_data = {
+        'business': 'Frenchay Fencing',
+        'name': job['issued_by_first_name'] + ' ' + job['issued_by_last_name'],
+        'street': street,
+        'city': city,
+        'post_code': post_code,
+        'number': job['issued_by_number']
+    }
     
     for key, value in letter_address_data.items():
         document.append(Paragraph(value, addressStyle))
