@@ -19,7 +19,10 @@ def send_invoice(request):
         job_id = request.POST.get('data')
         job = get_single_job(job_id)
 
-        job.issued_by_name = job.issued_by.first_name
+        job.issued_by_first_name = job.issued_by.first_name
+        job.issued_by_last_name = job.issued_by.last_name
+        job.issued_by_address = job.issued_by.address
+        job.issued_by_number = job.issued_by.phone_num
         job_dict = vars(job)
 
         pdf = create_pdf(job_dict)
