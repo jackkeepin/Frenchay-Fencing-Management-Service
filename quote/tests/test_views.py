@@ -6,7 +6,7 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        user = User.objects.create_user(email='test@email.com', first_name='first', last_name='last', phone_num='12345678901', password='testpass123')
+        user = User.objects.create_user(email='test@email.com', first_name='first', last_name='last', phone_num='12345678901', address='Test address, test city, TT11 1TT', password='testpass123')
         self.client.login(email='test@email.com', password='testpass123')
     
     def test_new_quote_view(self):
