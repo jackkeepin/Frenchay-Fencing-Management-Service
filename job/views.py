@@ -36,9 +36,11 @@ def send_invoice(request):
         email.attach('invoice.pdf', pdf, 'application/pdf')
         try:
             email.send()
+            job.sent_invoice = True
+            job.save()
             return JsonResponse( {'status': 'success'} )
         except SMTPException as err:
-            return JsonResponse( {'status': 'error'})
+            return JsonResponse( {'status': 'error'} )
 
 
 
