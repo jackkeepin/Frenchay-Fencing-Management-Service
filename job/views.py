@@ -3,11 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from job.models import Job, JobForm
 from job.services import get_all_jobs, get_single_job, create_pdf
+from quote.services import get_single_quote
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.core.mail import send_mail, EmailMessage
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from smtplib import SMTPException
 import json
 import os
@@ -114,4 +115,17 @@ class JobDeleteView(LoginRequiredMixin, DeleteView):
         job.id = job._id
         
         return job
+    
+
+    def delete(self, request, *args, **kwargs):
+        job = get_single_job(self.kwargs.get('obj_id'))
+
+        # when job is deleted also delete associated quote
+        quote = get_single_quote(job.associated_quote)
+        quote.delete()
+
+        job.delete()
+
+        success_url = reverse_lazy('view-jobs')
+        return HttpResponseRedirect(success_url)
     
