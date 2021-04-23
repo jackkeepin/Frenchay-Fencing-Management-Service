@@ -142,6 +142,13 @@
             <h2>{{ object.issued_by.first_name }}</h2>
         </div>
 
+        <div class="invoiceSent">
+            <h2><b>Invoice sent: </b></h2>
+        </div>
+        <div class="invoiceSentData">
+            <h2>{{ object.sent_invoice }}</h2>
+        </div>
+
     </div>
 
 
@@ -158,6 +165,8 @@
     <a class="btn btn-secondary" href="{% url 'job-update' object.id %}">Edit</a>
 
     <button id="sendInvoiceButton" type="button" class="btn btn-secondary">Send Invoice</button>
+
+    <a class="btn btn-secondary" href="{% url 'quote-details' object.associated_quote %}">View associated quote</a>
 
     <script>
 

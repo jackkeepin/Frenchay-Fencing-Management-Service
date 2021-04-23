@@ -29,7 +29,6 @@ def view_quotes(request):
 
 @csrf_exempt
 def create_job(request):
-
     if request.is_ajax():
         quote_id = request.POST.get('data')
         quote = get_single_quote(quote_id)
@@ -39,7 +38,10 @@ def create_job(request):
         try:
             job.full_clean()
             job.save()
-            url = reverse('view-jobs')
+            quote.associated_job = job._id
+            quote.save()
+
+            url = reverse('job-details', kwargs={'obj_id':job._id})
             data = {'success': url}
             return JsonResponse(data)
 

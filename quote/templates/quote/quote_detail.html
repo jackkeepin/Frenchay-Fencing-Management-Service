@@ -156,6 +156,11 @@
 
     <button id="createJobButton" type="button" class="btn btn-secondary">Create Job</button>
 
+    {% if object.associated_job != None %}
+        <a class="btn btn-secondary" href="{% url 'job-details' object.associated_job %}">View associated job</a>
+    {% endif %}
+    
+
     <script>
 
         $("#createJobButton").click(function() {

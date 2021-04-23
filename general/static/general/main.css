@@ -20,11 +20,16 @@ body {
   --background: #023644;
 }
 
-/* *,
-*::before,
-*::after {
-  box-sizing: border-box;
-} */
+.btn-secondary {
+  border-color: #72b366;
+  background-color: #92e782;
+  color: #023644;
+}
+
+.btn-secondary:hover {
+  background-color: #72b366;
+  color: #023644;
+}
 
 /* nav styles below */
 
