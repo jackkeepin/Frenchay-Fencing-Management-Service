@@ -3,8 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from quote.models import Quote, QuoteForm
 from quote.services import get_all_quotes, get_single_quote, create_job_with_quote
+from job.services import get_single_job
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy, reverse
 from user.models import User
@@ -29,7 +30,6 @@ def view_quotes(request):
 
 @csrf_exempt
 def create_job(request):
-
     if request.is_ajax():
         quote_id = request.POST.get('data')
         quote = get_single_quote(quote_id)
@@ -39,7 +39,10 @@ def create_job(request):
         try:
             job.full_clean()
             job.save()
-            url = reverse('view-jobs')
+            quote.associated_job = job._id
+            quote.save()
+
+            url = reverse('job-details', kwargs={'obj_id':job._id})
             data = {'success': url}
             return JsonResponse(data)
 
@@ -129,4 +132,17 @@ class QuoteDeleteView(LoginRequiredMixin, DeleteView):
         quote.id = quote._id
         
         return quote
+    
+    def delete(self, request, *args, **kwargs):
+        quote = get_single_quote(self.kwargs.get('obj_id'))
+
+        # when quote is deleted also delete associated job
+        if quote.associated_job != None:
+            job = get_single_job(quote.associated_job)
+            job.delete()
+
+        quote.delete()
+
+        success_url = reverse_lazy('view-quotes')
+        return HttpResponseRedirect(success_url)
     

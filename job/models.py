@@ -24,6 +24,8 @@ class Job(models.Model):
     issued_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    sent_invoice = models.BooleanField(default=False)
+    associated_quote = models.CharField(max_length=25)
 
     def __str__(self):
         return self.customer_first_name + " at " + self.address

@@ -25,6 +25,8 @@ def create_job_with_quote(quote):
         price_of_materials = quote.price_of_materials,
         price_of_labour = quote.price_of_labour,
         job_price = quote.quote_price,
-        issued_by = quote.issued_by
+        issued_by = quote.issued_by,
+        sent_invoice = False,
+        associated_quote = quote._id
     )
     return job
