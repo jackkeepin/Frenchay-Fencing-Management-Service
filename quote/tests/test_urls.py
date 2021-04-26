@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from quote.views import view_quotes, QuoteCreateView, QuoteDetailView, QuoteListView
+from quote.views import QuoteCreateView, QuoteDetailView, QuoteListView
 
 class TestUrls(SimpleTestCase):
     

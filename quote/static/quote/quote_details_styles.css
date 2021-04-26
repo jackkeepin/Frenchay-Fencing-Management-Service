@@ -82,6 +82,12 @@
 .issuedByData {
   grid-area: issuedData;
 }
+.quoteSent {
+  grid-area: sentQuote;
+}
+.quoteSentData {
+  grid-area: sentQuoteData;
+}
 
 .grid-container {
   display: grid;
@@ -98,7 +104,8 @@
     "removalPrice removalPriceData removalPriceData removalPriceData removalPriceData"
     "priceLabour priceLabourData priceLabourData priceLabourData priceLabourData"
     "priceQuote priceQuoteData priceQuoteData priceQuoteData priceQuoteData"
-    "issued issuedData issuedData issuedData issuedData";
+    "issued issuedData issuedData issuedData issuedData"
+    "sentQuote sentQuoteData sentQuoteData sentQuoteData sentQuoteData";
   grid-gap: 10px;
   padding: 10px;
   grid-template-columns: repeat(2, 500px) 30px;
@@ -124,6 +131,64 @@
   margin-top: 50px;
   margin-left: 50px;
   margin-bottom: 50px;
+}
+
+#sendingEmail {
+  display: none;
+}
+
+.loader {
+  display: none;
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #92e782;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#sendEmailSuccess {
+  display: none;
+  text-align: center;
+  background-color: #7bc17e;
+  border-color: #6aab6d;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+#sendEmailError {
+  display: none;
+  text-align: center;
+  background-color: #b86566;
+  border-color: #a15d5e;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 800px) {
@@ -167,7 +232,45 @@
     margin-right: 5%;
   }
 
-  #associatedJobButton {
+  #sendingEmail {
+    display: none;
+    font-size: large;
+  }
+
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid #92e782;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  #emailFeedback {
+    font-size: large;
+  }
+
+  #sendEmailError {
+    display: none;
+    text-align: center;
+    background-color: #b86566;
+    border-color: #a15d5e;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  #sendEmailSuccess {
+    display: none;
+    text-align: center;
+    background-color: #7bc17e;
+    border-color: #6aab6d;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  #associatedJobButton,
+  #createJobButton {
     margin-top: 10px;
   }
 

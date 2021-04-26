@@ -206,9 +206,17 @@
     overflow-wrap: break-word;
   }
 
+  h2 {
+    font-size: large;
+  }
+
+  h3 {
+    font-size: medium;
+  }
+
   #sendingEmail {
     display: none;
-    font-size: x-small;
+    font-size: large;
   }
 
   .loader {
