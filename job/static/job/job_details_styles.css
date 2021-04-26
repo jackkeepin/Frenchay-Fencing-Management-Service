@@ -144,6 +144,12 @@
   display: none;
 }
 
+#buttonsDiv {
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
 .loader {
   display: none;
   border: 12px solid #f3f3f3;
@@ -200,9 +206,17 @@
     overflow-wrap: break-word;
   }
 
+  h2 {
+    font-size: large;
+  }
+
+  h3 {
+    font-size: medium;
+  }
+
   #sendingEmail {
     display: none;
-    font-size: x-small;
+    font-size: large;
   }
 
   .loader {
@@ -235,5 +249,15 @@
     border-color: #6aab6d;
     margin-left: 5%;
     margin-right: 5%;
+  }
+
+  #associatedQuoteButton {
+    margin-top: 10px;
+  }
+
+  #buttonsDiv {
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 60px;
   }
 }

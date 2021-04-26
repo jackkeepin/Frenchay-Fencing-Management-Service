@@ -10,7 +10,6 @@ from django.core.mail import send_mail, EmailMessage
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseRedirect
 from smtplib import SMTPException
-import json
 import os
 
 
@@ -78,6 +77,19 @@ class JobDetailView(LoginRequiredMixin, DetailView):
         job.id = job._id
 
         return job
+    
+    def render_to_response(self, context, **response_kwargs):
+        # split the materials into an array to display differently on frontend
+        context['object'].materials = context['object'].materials.splitlines()
+        
+        response_kwargs.setdefault('content_type', self.content_type)
+        return self.response_class(
+            request=self.request,
+            template=self.get_template_names(),
+            context=context,
+            using=self.template_engine,
+            **response_kwargs
+        )
 
 
 class JobUpdateView(LoginRequiredMixin, UpdateView):

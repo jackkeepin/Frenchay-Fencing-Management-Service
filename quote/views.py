@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from quote.models import Quote, QuoteForm
-from quote.services import get_all_quotes, get_single_quote, create_job_with_quote
+from quote.services import get_all_quotes, get_single_quote, create_job_with_quote, create_pdf
 from job.services import get_single_job
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy, reverse
 from user.models import User
@@ -13,20 +13,10 @@ from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from job.models import Job
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail, EmailMessage
+from smtplib import SMTPException
+import os
 
-@login_required
-def view_quotes(request):
-    quotes = get_all_quotes()
-
-    #replace _id with id becasue leading underscore cannot be accessed
-    for item in quotes:
-        item['id'] = item.pop('_id')
-    
-    paginator = Paginator(quotes, 10)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    return render(request, 'quote/view_quotes.html', {'page_obj': page_obj})
 
 @csrf_exempt
 def create_job(request):
@@ -50,6 +40,52 @@ def create_job(request):
             data = {'error': err.message_dict}
             return JsonResponse(data)
             
+
+@csrf_exempt
+def send_quote(request):
+    if request.is_ajax():
+        quote_id = request.POST.get('data')
+        quote = get_single_quote(quote_id)
+
+        try:
+            if quote.customer_email == None:
+                raise ValidationError('Must have a customer email')
+            elif quote.date_of_job == None:
+                raise ValidationError('Must have a date of job')
+            elif quote.materials == None:
+                raise ValidationError('Must have materials')
+            elif quote.price_of_materials == None:
+                raise ValidationError('Must have price of materials')
+            elif quote.price_of_labour == None:
+                raise ValidationError('Must have price of labour')
+            elif quote.quote_price == None:
+                raise ValidationError('Must have quote price')
+
+        except ValidationError as err:
+            return JsonResponse( {'status': 'error'} )
+
+        quote.issued_by_first_name = quote.issued_by.first_name
+        quote.issued_by_last_name = quote.issued_by.last_name
+        quote.issued_by_address = quote.issued_by.address
+        quote.issued_by_number = quote.issued_by.phone_num
+        quote_dict = vars(quote)
+
+        pdf = create_pdf(quote_dict)
+
+        email = EmailMessage(
+            subject='Frenchay Fencing Quote',
+            body='Please find attached your quote.',
+            from_email=os.environ.get('EMAIL_USER'),
+            to=[quote.customer_email]
+        )
+        email.attach('quote.pdf', pdf, 'application/pdf')
+        try:
+            email.send()
+            quote.sent_quote = True
+            quote.save()
+            return JsonResponse( {'status': 'success'} )
+        except SMTPException as err:
+            return JsonResponse( {'status': 'error'} )
 
 
 class QuoteListView(LoginRequiredMixin, ListView):
@@ -84,6 +120,19 @@ class QuoteDetailView(LoginRequiredMixin, DetailView):
         quote = get_single_quote(self.kwargs.get('obj_id'))
         quote.id = quote._id
         return quote
+    
+    def render_to_response(self, context, **response_kwargs):
+        # split the materials into an array to display differently on frontend
+        context['object'].materials = context['object'].materials.splitlines()
+        
+        response_kwargs.setdefault('content_type', self.content_type)
+        return self.response_class(
+            request=self.request,
+            template=self.get_template_names(),
+            context=context,
+            using=self.template_engine,
+            **response_kwargs
+        )
 
 
 class QuoteCreateView(LoginRequiredMixin, CreateView):

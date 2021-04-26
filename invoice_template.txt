@@ -1,0 +1,11 @@
+Date of job: [date_of_job]
+
+Materials: [materials]
+
+Price of materials: [price_of_materials]
+
+Removal included: [removal_included]
+
+Price of labour: [price_of_labour]
+
+Total price: [job_price]
