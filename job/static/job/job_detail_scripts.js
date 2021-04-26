@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
     let materials = $("#materials").html()
     
     let regex = /'|\[|\]/g;
@@ -7,7 +6,6 @@ $( document ).ready(function() {
     materials = materials.replace(regex, '')
 
     let split_mats = materials.split(", ");
-    console.log(split_mats)
 
     $("#materials").html("")
     split_mats.forEach(function (material, index) {
