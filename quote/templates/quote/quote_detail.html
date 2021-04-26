@@ -213,7 +213,7 @@
                     $('.loader').hide();
                     $('#sendingEmail').hide();
                     if (data['status'] == 'error') {
-                        let error_msg = "<h3 id='emailFeedback'>Failed to send email. Please check the customer email is correct.</h3>";
+                        let error_msg = "<h3 id='emailFeedback'>Failed to send email. Please check the customer email is correct and all fields have been completed.</h3>";
         
                         $('#sendEmailError').html(error_msg);
                         $('#sendEmailError').show();
