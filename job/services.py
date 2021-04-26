@@ -1,16 +1,15 @@
 from job.models import Job
 from bson import ObjectId
 from reportlab.pdfgen.canvas import Canvas
-from reportlab.lib.pagesizes import letter, A4
+from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
-from reportlab.lib.units import inch, cm
+from reportlab.lib.units import cm
 from reportlab.lib.utils import ImageReader
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_RIGHT
-from io import StringIO, BytesIO
+from io import BytesIO
 import re
 import os
-import json
 
 def get_all_jobs():
     jobs = Job.objects.all().order_by('date_of_job')
@@ -144,6 +143,7 @@ def add_data(job):
 
 #construct and output pdf
 def create_pdf(job):
+    # create and use buffer so pdf is saved in an in-memory buffer
     buffer = BytesIO()
     SimpleDocTemplate(
         buffer,

@@ -10,7 +10,6 @@ from django.core.mail import send_mail, EmailMessage
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseRedirect
 from smtplib import SMTPException
-import json
 import os
 
 

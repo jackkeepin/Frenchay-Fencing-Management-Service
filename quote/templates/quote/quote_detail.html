@@ -148,16 +148,34 @@
             <h2>{{ object.issued_by.first_name }}</h2>
         </div>
 
+        <div class="quoteSent">
+            <h2><b>Quote sent: </b></h2>
+        </div>
+        <div class="quoteSentData">
+            <h2>{{ object.sent_quote }}</h2>
+        </div>
+
     </div>
 
     <div id="createJobError"></div>
+
+    <div class="flex-container">
+        <h1 id="sendingEmail">Sending email... &nbsp; </h1>
+        <div class=" loader"></div>
+    </div>
+
+
+    <div id="sendEmailError"></div>
+    <div id="sendEmailSuccess"></div>
     
     <div id="buttonsDiv">
         <a class="btn btn-outline-danger" href="{% url 'quote-delete' object.id %}">Delete</a>
         <a class="btn btn-secondary" href="{% url 'quote-update' object.id %}">Edit</a>
 
-        <button id="createJobButton" type="button" class="btn btn-secondary">Create Job</button>
+        <button id="sendQuoteButton" type="button" class="btn btn-secondary">Send Quote</button>
 
+        <button id="createJobButton" type="button" class="btn btn-secondary">Create Job</button>
+        
         {% if object.associated_job != None %}
             <a id="associatedJobButton" class="btn btn-secondary" href="{% url 'job-details' object.associated_job %}">View associated job</a>
         {% endif %}
@@ -181,6 +199,32 @@
                 else {
                     window.location.href = data['success'];
                 }
+            });
+        });
+
+        $( document ).ready(function() {
+            $("#sendQuoteButton").click(function() {
+                // show loading message
+                $('.loader').show();
+                $('#sendingEmail').show();
+        
+                $.post("/quote/send-quote", {'data': '{{object.id}}'}, function(data) {
+                    // hide loading message
+                    $('.loader').hide();
+                    $('#sendingEmail').hide();
+                    if (data['status'] == 'error') {
+                        let error_msg = "<h3 id='emailFeedback'>Failed to send email. Please check the customer email is correct.</h3>";
+        
+                        $('#sendEmailError').html(error_msg);
+                        $('#sendEmailError').show();
+                    }
+                    else {
+                        let success_msg = "<h3 id='emailFeedback'>Quote sent sucessfully</h3>";
+        
+                        $('#sendEmailSuccess').html(success_msg);
+                        $('#sendEmailSuccess').show();
+                    }
+                });
             });
         });
     </script>
