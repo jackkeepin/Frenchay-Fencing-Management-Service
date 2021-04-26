@@ -2,6 +2,24 @@
   margin-left: 2%;
 }
 
+#weather {
+  margin-bottom: 2%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#mapDiv,
+#map {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#map {
+  display: block;
+  width: 50%;
+  height: 400px;
+}
+
 .name {
   grid-area: customerName;
 }
@@ -259,5 +277,10 @@
     margin-top: 30px;
     margin-left: 30px;
     margin-bottom: 60px;
+  }
+
+  #map {
+    width: 90%;
+    height: 200px;
   }
 }
