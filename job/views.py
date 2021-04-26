@@ -75,6 +75,12 @@ class JobDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         job = get_single_job(self.kwargs.get('obj_id'))
         job.id = job._id
+        
+        address = job.address
+        address = address.split(",")
+        job.street = address[0].lstrip()
+        job.city = address[1].lstrip().lower()
+        job.post_code = address[2].lstrip()
 
         return job
     
