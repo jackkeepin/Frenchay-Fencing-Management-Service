@@ -98,8 +98,15 @@ def add_data(job):
                 rep = "[" + to_replace.group(1) + "]"
                 dat = job[to_replace.group(1)]
 
+                #if adding date to pdf, format date
+                if rep == '[date_of_job]':
+                    dat = dat.strftime("%d %B %Y")
+                    line = line.replace(rep, dat)
+                    document.append(Paragraph(line, dataStyle))
+                    document.append(Spacer(1, 30))
+
                 # if adding materials to pdf, format differently
-                if rep == '[materials]': 
+                elif rep == '[materials]': 
                     materials = dat.splitlines()
                     line = line.replace(rep, "")
                     document.append(Paragraph(line, dataStyle))

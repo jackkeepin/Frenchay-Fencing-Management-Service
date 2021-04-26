@@ -1,7 +1,4 @@
-##address at top right like letter
-
-#estimated start date
-
+Date of job: [date_of_job]
 
 Materials: [materials]
 
