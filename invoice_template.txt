@@ -1,0 +1,14 @@
+##address at top right like letter
+
+#estimated start date
+
+
+Materials: [materials]
+
+Price of materials: [price_of_materials]
+
+Removal included: [removal_included]
+
+Price of labour: [price_of_labour]
+
+Total price: [job_price]
