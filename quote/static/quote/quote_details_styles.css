@@ -207,7 +207,8 @@
       "removalPrice removalPriceData removalPriceData removalPriceData removalPriceData"
       "priceLabour priceLabourData priceLabourData priceLabourData priceLabourData"
       "priceQuote priceQuoteData priceQuoteData priceQuoteData priceQuoteData"
-      "issued issuedData issuedData issuedData issuedData";
+      "issued issuedData issuedData issuedData issuedData"
+      "sentQuote sentQuoteData sentQuoteData sentQuoteData sentQuoteData";
     grid-gap: 10px;
     padding: 10px;
     grid-template-columns: repeat(2, 1fr) 30px;

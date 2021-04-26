@@ -47,6 +47,23 @@ def send_quote(request):
         quote_id = request.POST.get('data')
         quote = get_single_quote(quote_id)
 
+        try:
+            if quote.customer_email == None:
+                raise ValidationError('Must have a customer email')
+            elif quote.date_of_job == None:
+                raise ValidationError('Must have a date of job')
+            elif quote.materials == None:
+                raise ValidationError('Must have materials')
+            elif quote.price_of_materials == None:
+                raise ValidationError('Must have price of materials')
+            elif quote.price_of_labour == None:
+                raise ValidationError('Must have price of labour')
+            elif quote.quote_price == None:
+                raise ValidationError('Must have quote price')
+
+        except ValidationError as err:
+            return JsonResponse( {'status': 'error'} )
+
         quote.issued_by_first_name = quote.issued_by.first_name
         quote.issued_by_last_name = quote.issued_by.last_name
         quote.issued_by_address = quote.issued_by.address
