@@ -120,6 +120,12 @@
   margin-right: 30%;
 }
 
+#buttonsDiv {
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
 @media screen and (max-width: 800px) {
   .grid-container {
     display: grid;
@@ -159,5 +165,15 @@
     border-color: #a15d5e;
     margin-left: 5%;
     margin-right: 5%;
+  }
+
+  #associatedJobButton {
+    margin-top: 10px;
+  }
+
+  #buttonsDiv {
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 60px;
   }
 }
