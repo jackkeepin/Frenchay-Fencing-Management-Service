@@ -162,11 +162,13 @@
     <div id="sendEmailError"></div>
     <div id="sendEmailSuccess"></div>
 
-    <a class="btn btn-outline-danger" href="{% url 'job-delete' object.id %}">Delete</a>
-    <a class="btn btn-secondary" href="{% url 'job-update' object.id %}">Edit</a>
-
-    <button id="sendInvoiceButton" type="button" class="btn btn-secondary">Send Invoice</button>
-
-    <a class="btn btn-secondary" href="{% url 'quote-details' object.associated_quote %}">View associated quote</a>
+    <div id="buttonsDiv">
+        <a class="btn btn-outline-danger" href="{% url 'job-delete' object.id %}">Delete</a>
+        <a class="btn btn-secondary" href="{% url 'job-update' object.id %}">Edit</a>
+    
+        <button id="sendInvoiceButton" type="button" class="btn btn-secondary">Send Invoice</button>
+    
+        <a id="associatedQuoteButton" class="btn btn-secondary" href="{% url 'quote-details' object.associated_quote %}">View associated quote</a>
+    </div>
 
 {% endblock content %}

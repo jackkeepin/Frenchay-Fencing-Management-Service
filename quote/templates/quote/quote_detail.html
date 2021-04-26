@@ -151,38 +151,16 @@
     </div>
 
     <div id="createJobError"></div>
-
-    <a class="btn btn-outline-danger" href="{% url 'quote-delete' object.id %}">Delete</a>
-    <a class="btn btn-secondary" href="{% url 'quote-update' object.id %}">Edit</a>
-
-    <button id="createJobButton" type="button" class="btn btn-secondary">Create Job</button>
-
-    {% if object.associated_job != None %}
-        <a class="btn btn-secondary" href="{% url 'job-details' object.associated_job %}">View associated job</a>
-    {% endif %}
     
+    <div id="buttonsDiv">
+        <a class="btn btn-outline-danger" href="{% url 'quote-delete' object.id %}">Delete</a>
+        <a class="btn btn-secondary" href="{% url 'quote-update' object.id %}">Edit</a>
 
-    <script>
+        <button id="createJobButton" type="button" class="btn btn-secondary">Create Job</button>
 
-        $("#createJobButton").click(function() {
-            $.post("/quote/create-job", {'data': '{{object.id}}'}, function(data) {
-                if (data['error']) {
-                    let error_msg = ""
+        {% if object.associated_job != None %}
+            <a id="associatedJobButton" class="btn btn-secondary" href="{% url 'job-details' object.associated_job %}">View associated job</a>
+        {% endif %}
+    </div>
 
-                    if ('address' in data['error'] == true) {
-                        error_msg = "<h3>A job at this address already exists!</h3>"
-                    }
-                    else {
-                        error_msg = "<h3>You must fill out all fields before you can create a job!</h3>"
-                    }
-                    $('#createJobError').html(error_msg);
-                    $('#createJobError').show();
-                }
-                else {
-                    window.location.href = data['success'];
-                }
-            });
-        });
-
-    </script>
 {% endblock content %}
