@@ -14,6 +14,10 @@
 
     <h1>Job details</h1>
 
+    <a id="weather" class="weatherwidget-io" href="https://forecast7.com/en/51d45n2d59/{{ object.city }}/" data-label_1="{{object.street}}"  data-label_2="{{ object.post_code }}" data-days="3" data-theme="original" ></a>
+
+    <div id="mapDiv"></div>
+
     <div class="grid-container" id="data-container">
 
         <div class="name">
@@ -196,6 +200,13 @@
                     }
                 });
             });
+        });
+
+        $(document).ready( function(){
+            var addr = '{{ object.address }}';
+
+            var embed= "<iframe id='map' frameborder='0' scrolling='no' marginheight='30' marginwidth='30' src='https://maps.google.com/maps?&amp;q=" + encodeURIComponent( addr ) + "&amp;output=embed'></iframe>";  
+            $('#mapDiv').html(embed);
         });
     </script>
 {% endblock content %}
