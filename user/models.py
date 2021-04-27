@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser
+from django import forms
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
@@ -72,3 +73,11 @@ class User(AbstractBaseUser):
     
     def has_module_perms(self, app_label):
         return True
+
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'phone_num', 'address']
