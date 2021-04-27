@@ -33,6 +33,7 @@ class Job(models.Model):
     def get_absolute_url(self):
         return reverse('view-jobs')
 
+
 class JobForm(ModelForm):
 
     street = CharField()
