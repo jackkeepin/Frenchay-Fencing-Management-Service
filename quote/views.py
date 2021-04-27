@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from quote.models import Quote, QuoteForm
@@ -34,6 +35,8 @@ def create_job(request):
 
             url = reverse('job-details', kwargs={'obj_id':job._id})
             data = {'success': url}
+            name = quote.customer_first_name + ' ' + quote.customer_last_name
+            messages.success(request, 'Job for ' + name + ' deleted')
             return JsonResponse(data)
 
         except ValidationError as err:
@@ -142,6 +145,8 @@ class QuoteCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.issued_by = self.request.user
         form.instance.address = form.cleaned_data['address']
+        name = form.cleaned_data['customer_first_name'] +  ' ' + form.cleaned_data['customer_last_name']
+        messages.success(self.request, 'Quote for ' + name + ' created')
 
         return super().form_valid(form)
 
@@ -168,6 +173,9 @@ class QuoteUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.address = form.cleaned_data['address']
+        name = form.cleaned_data['customer_first_name'] +  ' ' + form.cleaned_data['customer_last_name']
+        messages.success(self.request, 'Quote for ' + name + ' updated')
+
         return super().form_valid(form)
 
 
@@ -190,8 +198,11 @@ class QuoteDeleteView(LoginRequiredMixin, DeleteView):
             job = get_single_job(quote.associated_job)
             job.delete()
 
+        name = quote.customer_first_name +  ' ' + quote.customer_last_name
+        
         quote.delete()
 
         success_url = reverse_lazy('view-quotes')
+        messages.success(self.request, 'Quote and associated job for ' + name + ' deleted')
         return HttpResponseRedirect(success_url)
     

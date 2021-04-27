@@ -132,6 +132,13 @@ nav a:hover {
   transition: opacity 250ms ease-in-out 250ms;
 }
 
+.alert {
+  margin-top: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
+}
+
 @media screen and (min-width: 800px) {
   .nav-toggle-label {
     display: none;
@@ -190,5 +197,11 @@ nav a:hover {
 
   nav a:hover::before {
     transform: scale(1, 1);
+  }
+
+  .alert {
+    margin-top: 1%;
+    margin-left: 30%;
+    margin-right: 30%;
   }
 }
