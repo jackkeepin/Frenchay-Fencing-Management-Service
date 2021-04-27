@@ -139,6 +139,19 @@ nav a:hover {
   text-align: center;
 }
 
+.search {
+  margin-left: 5%;
+}
+
+.search-input {
+  display: inline-block;
+  width: 100px;
+}
+
+.pagination {
+  margin-left: 5%;
+}
+
 @media screen and (min-width: 800px) {
   .nav-toggle-label {
     display: none;
@@ -203,5 +216,9 @@ nav a:hover {
     margin-top: 1%;
     margin-left: 30%;
     margin-right: 30%;
+  }
+
+  .search-input {
+    width: auto;
   }
 }
