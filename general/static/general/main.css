@@ -136,6 +136,7 @@ nav a:hover {
   margin-top: 1%;
   margin-left: 5%;
   margin-right: 5%;
+  text-align: center;
 }
 
 @media screen and (min-width: 800px) {

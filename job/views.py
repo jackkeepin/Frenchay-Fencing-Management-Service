@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from job.models import Job, JobForm
@@ -120,6 +121,9 @@ class JobUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.address = form.cleaned_data['address']
+        name = form.cleaned_data['customer_first_name'] +  ' ' + form.cleaned_data['customer_last_name']
+        messages.success(self.request, 'Job for ' + name + ' updated')
+
         return super().form_valid(form)
 
 
@@ -142,8 +146,11 @@ class JobDeleteView(LoginRequiredMixin, DeleteView):
         quote = get_single_quote(job.associated_quote)
         quote.delete()
 
+        name = job.customer_first_name +  ' ' + job.customer_last_name
+
         job.delete()
 
         success_url = reverse_lazy('view-jobs')
+        messages.success(self.request, 'Job and associated quote for ' + name + ' deleted')
         return HttpResponseRedirect(success_url)
     
