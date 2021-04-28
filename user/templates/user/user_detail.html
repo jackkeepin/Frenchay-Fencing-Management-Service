@@ -1,0 +1,51 @@
+{% extends "general/base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'user/user_details_styles.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <h1>User Details</h1>
+
+    <div class="grid-container" id="data-container">
+
+        <div class="name">
+            <h2><b>Name: </b></h2>
+        </div>
+        <div class="nameData">
+            <h2>{{ object.first_name }} {{ object.last_name }}</h2>
+        </div>
+
+        <div class="email">
+            <h2><b>Email: </b></h2>
+        </div>
+        <div class="emailData">
+            <h2>{{ object.email }}</h2>
+        </div>
+
+        <div class="phoneNum">
+            <h2><b>Phone Number: </b></h2>
+        </div>
+        <div class="phoneNumData">
+            <h2>{{ object.phone_num }}</h2>
+        </div>
+            
+        <div class="address">
+            <h2><b>Address: </b></h2>
+        </div>
+        <div class="addressData">
+            <h2>{{ object.address }}</h2>
+        </div>
+        
+    </div>
+
+    <a id="editDetailsButton" class="btn btn-secondary" href="{% url 'edit-profile' %}">Edit details</a>
+    
+
+{% endblock content %}
