@@ -16,14 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
-from user import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('general.urls')),
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='logout'),
-    path('profile/', user_views.profile, name='profile'),
+    path('user/', include('user.urls')),
     path('quote/', include('quote.urls')),
     path('job/', include('job.urls')),
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'), name='password_reset'),
