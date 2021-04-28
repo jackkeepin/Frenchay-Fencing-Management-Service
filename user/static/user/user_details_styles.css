@@ -1,0 +1,83 @@
+.name {
+  grid-area: name;
+}
+.nameData {
+  grid-area: nameData;
+}
+.email {
+  grid-area: email;
+}
+.emailData {
+  grid-area: emailData;
+}
+.phoneNum {
+  grid-area: phoneNum;
+}
+.phoneNumData {
+  grid-area: phoneNumData;
+}
+.address {
+  grid-area: address;
+}
+.addressData {
+  grid-area: addressData;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "name nameData nameData nameData nameData"
+    "email emailData emailData emailData emailData"
+    "phoneNum phoneNumData phoneNumData phoneNumData phoneNumData"
+    "address addressData addressData addressData addressData";
+  grid-gap: 10px;
+  padding: 10px;
+  grid-template-columns: repeat(2, 500px) 30px;
+  grid-template-rows: minmax(0.5%, 100%) repeat(2, 1fr);
+  overflow-wrap: break-word;
+}
+
+.grid-container > div {
+  text-align: left;
+  padding: 10px 0;
+}
+
+#data-container {
+  margin-left: 2%;
+}
+
+#editDetailsButton {
+  margin-top: 30px;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 800px) {
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      "name nameData nameData nameData nameData"
+      "email emailData emailData emailData emailData"
+      "phoneNum phoneNumData phoneNumData phoneNumData phoneNumData"
+      "address addressData addressData addressData addressData";
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-columns: repeat(2, 1fr) 30px;
+    grid-template-rows: minmax(0.5%, 100%) repeat(2, 1fr);
+    overflow-wrap: break-word;
+  }
+
+  h2 {
+    font-size: large;
+  }
+
+  h3 {
+    font-size: medium;
+  }
+
+  #editDetailsButton {
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-bottom: 60px;
+  }
+}

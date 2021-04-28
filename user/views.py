@@ -1,23 +1,26 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .models import UserUpdateForm
+from django.views.generic import DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import User, UserUpdateForm
 
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
 
-        if user_form.is_valid():
-            user_form.save()
-            messages.success(request, f'Your account has been updated.')
-            return redirect('profile')
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
 
-    else:
-        user_form = UserUpdateForm(instance=request.user)
+    def get_object(self):
+        return self.request.user
 
-    context = {
-        'user_form': user_form
-    }
 
-    return render(request, 'user/profile.html', context)
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+
+    def get_object(self):
+        return self.request.user
+    
+    def form_valid(self, form):
+        name = form.cleaned_data['first_name']
+        messages.success(self.request, 'Your details have been updated, ' + name)
+
+        return super().form_valid(form)
