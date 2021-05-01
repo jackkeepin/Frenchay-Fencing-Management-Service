@@ -1,8 +1,22 @@
 {% extends "general/base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'general/home_styles.css' %}">
+{% endblock %}
 
 {% block content %}
 
-    <p>Start of block content</p>
     <h2>This is the home/landing page</h2>
+
+    <div id="slider">
+        <figure>
+            <img src="{% static 'general/fenceimg1.jpg' %}">
+            <img src="{% static 'general/fenceimg2.jpg' %}">
+            <img src="{% static 'general/fenceimg3.jpg' %}">
+            <img src="{% static 'general/fenceimg4.jpg' %}">
+            <img src="{% static 'general/fenceimg1.jpg' %}">
+        </figure>
+    </div>
 
 {% endblock content %}
