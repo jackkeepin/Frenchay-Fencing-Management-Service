@@ -8,8 +8,10 @@
 
 #slider {
   overflow: hidden;
-  width: 720px;
-  height: 360px;
+  /* width: 1440px;
+  height: 720px; */
+  width: 90vw;
+  height: 40vw;
   margin-left: auto;
   margin-right: auto;
 }
