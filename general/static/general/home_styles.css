@@ -8,7 +8,7 @@
 
 @media screen and (max-width: 800px) {
   #slider {
-    width: 100%; /* Test this vs 80% when deployed */
+    width: 80%; /* Test this vs 80% when deployed */
     height: 20%;
   }
 }
