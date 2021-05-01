@@ -41,7 +41,7 @@ materialStyle = ParagraphStyle(
 # add data to pdf
 def add_data(job):
     document = []
-    document.append(get_image('./general/static/general/logosmall.jpg', width=8*cm))
+    document.append(get_image('./general/static/general/img/logosmall.jpg', width=8*cm))
     document.append(Spacer(1, 30))
     
     owner_split_address = job['issued_by_address'].split(',')

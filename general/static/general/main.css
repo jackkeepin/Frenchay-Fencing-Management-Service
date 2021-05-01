@@ -8,6 +8,11 @@
   src: local("fontregular"), url("./fonts/fontregular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "FfFontExtraBold";
+  src: local("fontregular"), url("./fonts/fontextrabold.otf") format("opentype");
+}
+
 body {
   margin: 0;
 }
