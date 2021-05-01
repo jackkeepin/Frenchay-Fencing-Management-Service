@@ -1,0 +1,63 @@
+#slider {
+  overflow: hidden;
+  width: 720px;
+  height: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 800px) {
+  #slider {
+    width: 100%; /* Test this vs 80% when deployed */
+    height: 20%;
+  }
+}
+
+#slider figure {
+  position: relative;
+  width: 600%;
+  margin: 0;
+  left: 0;
+  animation: 20s slider infinite;
+}
+
+#slider figure img {
+  width: calc(100% / 6);
+  float: left;
+}
+
+@keyframes slider {
+  0% {
+    left: 0;
+  }
+  15% {
+    left: 0;
+  }
+  20% {
+    left: -100%;
+  }
+  35% {
+    left: -100%;
+  }
+  40% {
+    left: -200%;
+  }
+  55% {
+    left: -200%;
+  }
+  60% {
+    left: -300%;
+  }
+  75% {
+    left: -300%;
+  }
+  80% {
+    left: -400%;
+  }
+  95% {
+    left: -400%;
+  }
+  100% {
+    left: -500%;
+  }
+}
