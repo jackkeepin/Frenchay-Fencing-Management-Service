@@ -1,3 +1,39 @@
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  /* margin: 10px; */
+  /* The image used */
+  background-image: url("/static/general/img/fenceimg2.jpg");
+
+  /* Full height */
+  height: 90%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+.caption h1 {
+  font-family: "FfFontExtraBold";
+  font-size: 70px;
+}
+.caption h2 {
+  font-family: "FfFontExtraBold";
+  font-size: 40px;
+}
+
 .title {
   text-align: center;
 }
