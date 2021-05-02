@@ -67,6 +67,10 @@ table th {
   text-align: center;
 }
 
+.pagination-links {
+  color: #023644;
+}
+
 .page-btn {
   margin-left: 5px;
 }
