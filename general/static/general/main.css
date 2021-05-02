@@ -25,6 +25,16 @@ body {
   --background: #023644;
 }
 
+.btn-outline-info {
+  border-color: #023644;
+  color: #023644;
+}
+.btn-outline-info:hover {
+  background-color: #92e782;
+  border-color: #023644;
+  color: #023644;
+}
+
 .btn-secondary {
   border-color: #72b366;
   background-color: #92e782;
@@ -46,7 +56,7 @@ header {
   width: 100%;
 }
 
-.nav-toggle {
+/* .nav-toggle {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
@@ -54,7 +64,7 @@ header {
 
 .nav-toggle:focus ~ .nav-toggle-label {
   outline: 3px solid #92e782;
-}
+} */
 
 .nav-toggle-label {
   position: absolute;
