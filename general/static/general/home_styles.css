@@ -59,6 +59,17 @@ html {
   font-size: 40px;
 }
 
+.paragraph {
+  margin-bottom: 2%;
+}
+
+#content {
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+}
+
 @media screen and (max-width: 800px) {
   .preload-images {
     background: url("/static/general/img/fenceimg1.jpg") no-repeat -9999px -9999px,
