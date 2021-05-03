@@ -167,6 +167,17 @@ nav a:hover {
   margin-left: 5%;
 }
 
+.footer {
+  /* position: fixed; */
+  height: 10%;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #023644;
+  color: white;
+  text-align: center;
+}
+
 /* desktop styles */
 @media screen and (min-width: 800px) {
   .nav-toggle-label {

@@ -7,8 +7,61 @@
 
 {% block content %}
 
-    <h2>This is the home/landing page</h2>
+    <h1 class="title main-title">About us</h1>
 
-    <div id="content"></div>
+    <h2 class="text sub-title">
+        We offer free no-obligation quotes and guarantee all work will be finished the higest standard.
+    </h2>
+    <!-- <h2 class="text sub-title">
+        Our decades of experience means
+    </h2> -->
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col center">
+                <h3 class="sub-heading text-right">ALL WORK GUARANTEED</h3>
+                <p class="text text-right">
+                    All work quoted is guaranteed and will be finished to a professional quality.
+                </p>
+                <p class="text text-right">
+                    Removal of old materials can be arranged.
+                </p>
+            </div>
+            <div class="col">
+                <img class="about-img" src="{% static 'general/img/fenceimg4.jpg' %}" alt="Image of fence on slope">
+            </div>       
+        </div>
+        <div class="row">
+            <div class="col center">
+                <h3 class="sub-heading text-right">HIGH QUALITY MATERIALS</h3>
+                <p class="text text-right">   
+                    All timer is pressure treated to maximise the lifespan and durability of your
+                    fence by resisting rot and decay.
+                </p>
+                <p class="text text-right">
+                    All wooden posts will be installed with Postsavers to prevent rot at ground-level.
+                </p>
+            </div>
+            <div class="col">
+                <img class="about-img" src="{% static 'general/img/fenceimg6.jpg' %}" alt="Image of fence on slope">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col center">
+                <h3 class="sub-heading text-right">GATE INSTALLATIONS</h3>
+                <p class="text text-right">   
+                    Gate installation, repair or replacement can be arranged.
+                </p>
+                <p class="text text-right">
+                    We can fit garden gates, country-style gates, drieway gates and more.
+                </p>
+            </div>
+            <div class="col">
+                <img class="about-img" src="{% static 'general/img/fenceimg7.jpg' %}" alt="Image of fence on slope">
+            </div>
+        </div>
+    </div>
+    
 
 {% endblock content %}
