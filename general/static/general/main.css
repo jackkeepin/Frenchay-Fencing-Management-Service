@@ -51,12 +51,12 @@ body {
 header {
   background: var(--background);
   text-align: center;
-  position: sticky; /* postion: fixed; here caused issue where content beneath would overlap */
+  position: sticky;
   z-index: 999;
   width: 100%;
 }
 
-/* .nav-toggle {
+.nav-toggle {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
@@ -64,7 +64,7 @@ header {
 
 .nav-toggle:focus ~ .nav-toggle-label {
   outline: 3px solid #92e782;
-} */
+}
 
 .nav-toggle-label {
   position: absolute;
@@ -167,6 +167,7 @@ nav a:hover {
   margin-left: 5%;
 }
 
+/* desktop styles */
 @media screen and (min-width: 800px) {
   .nav-toggle-label {
     display: none;
