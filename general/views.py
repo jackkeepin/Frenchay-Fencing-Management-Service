@@ -10,6 +10,9 @@ import os
 def home(request):
     return render(request, 'general/home.html')
 
+def about(request):
+    return render(request, 'general/about.html')
+
 @csrf_exempt
 def contact(request):
     if request.method == 'POST':
