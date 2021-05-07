@@ -5,6 +5,7 @@
 
     <head>
         <meta charset="utf-8"/>
+        <meta name="description" content="Local fencing company in Bristol">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
         <title>Frenchay Fencing</title>
@@ -22,7 +23,8 @@
     <body>
 
         <header>
-            <a href="{% url 'general-home' %}"><img src="{% static 'general/img/logosmall.jpg' %}" style="height: 60px; width: 200px; margin-right: 10px;"></a>
+            <a href="{% url 'general-home' %}"><img src="{% static 'general/img/logosmall.jpg' %}" style="height: 60px; width: 200px; margin-right: 10px;" alt="Frenchay Fencing Logo"></a>
+            <label for="nav-toggle"></label>
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
 
             <nav>
@@ -35,8 +37,8 @@
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                         <li><a href="{% url 'general-home' %}">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
                         <li><a href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                     

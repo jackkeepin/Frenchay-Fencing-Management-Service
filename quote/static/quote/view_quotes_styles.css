@@ -73,6 +73,9 @@ table th {
 .pagination {
   display: inline-block;
 }
+.pagination-links {
+  color: #023644;
+}
 
 @media screen and (max-width: 800px) {
   .pagination {

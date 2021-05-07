@@ -8,8 +8,7 @@ from reportlab.lib.utils import ImageReader
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_RIGHT
 from io import BytesIO
-import re
-import os
+import os, re
 
 def get_all_jobs():
     jobs = Job.objects.all().order_by('date_of_job')
@@ -40,6 +39,9 @@ materialStyle = ParagraphStyle(
 
 # add data to pdf
 def add_data(job):
+    """
+    Add all the data from the job to the pdf.
+    """
     document = []
     document.append(get_image('./general/static/general/img/logosmall.jpg', width=8*cm))
     document.append(Spacer(1, 30))
@@ -164,3 +166,4 @@ def get_image(path, width):
     iw, ih = img.getSize()
     aspect = ih / float(iw)
     return Image(path, width=width, height=(width * aspect))
+
