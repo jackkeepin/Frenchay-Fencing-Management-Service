@@ -85,6 +85,7 @@ class JobDetailView(LoginRequiredMixin, DetailView):
 
         return job
     
+
     def render_to_response(self, context, **response_kwargs):
         # split the materials into an array to display differently on frontend
         context['object'].materials = context['object'].materials.splitlines()

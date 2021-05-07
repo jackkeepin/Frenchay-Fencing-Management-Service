@@ -152,9 +152,13 @@
             <h2><b>Quote sent: </b></h2>
         </div>
         <div class="quoteSentData">
-            <h2>{{ object.sent_quote }}</h2>
+            {% if object.sent_quote == False %}
+                <h2>No</h2>
+            {% else %}
+                <h2>Yes</h2>
+            {% endif %}
         </div>
-
+        
     </div>
 
     <div id="createJobError"></div>
