@@ -83,16 +83,9 @@ class JobDetailView(LoginRequiredMixin, DetailView):
         job.city = address[1].lstrip().lower()
         job.post_code = address[2].lstrip()
 
-        tag_code, url = get_widget_code(get_coords(job.city), job.city, 'en')
-        if not is_url_ok(url):
-            tag_code, url = fix_url(get_coords(job.city), job.city, 'en')
-        
-        print("below 2")
-        print(tag_code)
-        print(url)
-        
         return job
     
+
     def render_to_response(self, context, **response_kwargs):
         # split the materials into an array to display differently on frontend
         context['object'].materials = context['object'].materials.splitlines()
