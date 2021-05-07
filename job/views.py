@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from job.models import Job, JobForm
-from job.services import get_all_jobs, get_single_job, create_pdf, get_coords, get_widget_code, fix_url, is_url_ok
+from job.services import get_all_jobs, get_single_job, create_pdf
 from quote.services import get_single_quote
 from django.db.models import Q
 from django.urls import reverse_lazy
