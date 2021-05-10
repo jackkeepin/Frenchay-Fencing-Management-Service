@@ -30,9 +30,10 @@ def send_invoice(request):
 
         email = EmailMessage(
             subject='Frenchay Fencing Invoice',
-            body='Please find attached your invoice.',
+            body='Please find attached your invoice.\n\nPlease do not reply to this email. Instead, contact us using the details on your invoice.',
             from_email=os.environ.get('EMAIL_USER'),
-            to=[job.customer_email]
+            to=[job.customer_email],
+            cc=[job.issued_by.email]
         )
         email.attach('invoice.pdf', pdf, 'application/pdf')
         try:
