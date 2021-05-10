@@ -77,9 +77,10 @@ def send_quote(request):
 
         email = EmailMessage(
             subject='Frenchay Fencing Quote',
-            body='Please find attached your quote.',
+            body='Please find attached your quote.\n\nPlease do not reply to this email. Instead, contact us using the details on your quote.',
             from_email=os.environ.get('EMAIL_USER'),
-            to=[quote.customer_email]
+            to=[quote.customer_email],
+            cc=[quote.issued_by.email]
         )
         email.attach('quote.pdf', pdf, 'application/pdf')
         try:
