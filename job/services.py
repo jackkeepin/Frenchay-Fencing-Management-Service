@@ -1,6 +1,5 @@
 from job.models import Job
 from bson import ObjectId
-from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.units import cm
@@ -8,7 +7,7 @@ from reportlab.lib.utils import ImageReader
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_RIGHT
 from io import BytesIO
-import os, re
+import re
 
 def get_all_jobs():
     jobs = Job.objects.all().order_by('date_of_job')
@@ -37,7 +36,6 @@ materialStyle = ParagraphStyle(
 )
 
 
-# add data to pdf
 def add_data(job):
     """
     Add all the data from the job to the pdf.
@@ -143,8 +141,11 @@ def add_data(job):
     return document
 
 
-#construct and output pdf
 def create_pdf(job):
+    """
+    Construct and output pdf.
+    """
+
     # create and use buffer so pdf is saved in an in-memory buffer
     buffer = BytesIO()
     SimpleDocTemplate(
@@ -160,8 +161,10 @@ def create_pdf(job):
     return pdf
 
 
-#to get logo and keep original aspect ratio
 def get_image(path, width):
+    """
+    Get image to diplay on pdf at original aspect ratio
+    """
     img = ImageReader(path)
     iw, ih = img.getSize()
     aspect = ih / float(iw)
