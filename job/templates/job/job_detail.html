@@ -151,7 +151,11 @@
             <h2><b>Invoice sent: </b></h2>
         </div>
         <div class="invoiceSentData">
-            <h2>{{ object.sent_invoice }}</h2>
+            {% if object.sent_invoice == False %}
+                <h2>No</h2>
+            {% else %}
+                <h2>Yes</h2>
+            {% endif %}
         </div>
 
     </div>
