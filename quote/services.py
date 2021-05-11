@@ -10,7 +10,6 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_RIGHT
 from io import BytesIO
 import re
-import os
 
 def get_all_quotes():
     quotes = Quote.objects.all().order_by('date_of_job')
@@ -59,8 +58,10 @@ materialStyle = ParagraphStyle(
 )
 
 
-# add data to pdf
 def add_data(quote):
+    """
+    Add all the data from the quote to the pdf.
+    """
     document = []
     document.append(get_image('./general/static/general/img/logosmall.jpg', width=8*cm))
     document.append(Spacer(1, 30))
@@ -162,8 +163,11 @@ def add_data(quote):
     return document
 
 
-#construct and output pdf
 def create_pdf(quote):
+    """
+    Construct and output pdf.
+    """
+
     # create and use buffer so pdf is saved in an in-memory buffer
     buffer = BytesIO()
     SimpleDocTemplate(
@@ -179,8 +183,10 @@ def create_pdf(quote):
     return pdf
 
 
-#to get logo and keep original aspect ratio
 def get_image(path, width):
+    """
+    Get image to diplay on pdf at original aspect ratio
+    """
     img = ImageReader(path)
     iw, ih = img.getSize()
     aspect = ih / float(iw)
