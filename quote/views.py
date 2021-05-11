@@ -36,7 +36,7 @@ def create_job(request):
             url = reverse('job-details', kwargs={'obj_id':job._id})
             data = {'success': url}
             name = quote.customer_first_name + ' ' + quote.customer_last_name
-            messages.success(request, 'Job for ' + name + ' deleted')
+            messages.success(request, 'Job for ' + name + ' created')
             return JsonResponse(data)
 
         except ValidationError as err:
