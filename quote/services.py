@@ -143,7 +143,7 @@ def add_data(quote):
                     if dat == True:
                         dat = "Yes"
                         line = line.replace(rep, dat)
-                        price_of_removal_line = "Price of removal: " + quote['price_of_removal']
+                        price_of_removal_line = "Price of removal: " + '£' + quote['price_of_removal']
                         document.append(Paragraph(line, dataStyle))
                         document.append(Spacer(1, 30))
                         document.append(Paragraph(price_of_removal_line, dataStyle))
@@ -154,6 +154,12 @@ def add_data(quote):
                         document.append(Paragraph(line, dataStyle))
                         document.append(Spacer(1, 30))    
                 
+                #add pound sign to beginning of prices
+                elif rep == '[price_of_materials]' or rep == '[price_of_labour]' or rep == '[quote_price]':
+                    line = line.replace(rep, str('£' + dat))
+                    document.append(Paragraph(line, dataStyle))
+                    document.append(Spacer(1, 30))
+
                 # if adding anything but materials, format normally
                 else:
                     line = line.replace(rep, str(dat))
