@@ -87,7 +87,7 @@
             {% if object.price_of_materials == None %}
                 <h2>Not yet specified</h2> 
             {% else %}
-                <h2>{{ object.price_of_materials }}</h2>
+                <h2>£{{ object.price_of_materials }}</h2>
             {% endif %}
         </div>
 
@@ -110,7 +110,7 @@
                 </div>
             {% else %}
                 <div class="priceOfRemovalData">
-                    <h2>{{ object.price_of_removal }}</h2>
+                    <h2>£{{ object.price_of_removal }}</h2>
                 </div>
             {% endif %}
         {% endif %}
@@ -123,7 +123,7 @@
             {% if object.price_of_labour == None %}
                 <h2>Not yet specified</h2>
             {% else %}
-                <h2>{{ object.price_of_labour }}</h2>
+                <h2>£{{ object.price_of_labour }}</h2>
             {% endif %}
         </div>
 
@@ -135,7 +135,7 @@
             {% if object.job_price == None %}
                 <h2>Not yet specified</h2>
             {% else %}
-                <h2>{{ object.job_price }}</h2>
+                <h2>£{{ object.job_price }}</h2>
         {% endif %}
         </div>
         
@@ -151,7 +151,11 @@
             <h2><b>Invoice sent: </b></h2>
         </div>
         <div class="invoiceSentData">
-            <h2>{{ object.sent_invoice }}</h2>
+            {% if object.sent_invoice == False %}
+                <h2>No</h2>
+            {% else %}
+                <h2>Yes</h2>
+            {% endif %}
         </div>
 
     </div>
