@@ -133,7 +133,7 @@ def add_data(job):
                         document.append(Spacer(1, 30))
                 
                 #add pound sign to beginning of prices
-                elif rep == '[price_of_materials]' or rep == '[price_of_labour]' or rep == '[quote_price]':
+                elif rep == '[price_of_materials]' or rep == '[price_of_labour]' or rep == '[job_price]':
                     line = line.replace(rep, str('£' + dat))
                     document.append(Paragraph(line, dataStyle))
                     document.append(Spacer(1, 30))
