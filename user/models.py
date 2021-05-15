@@ -81,6 +81,18 @@ class User(AbstractBaseUser):
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
+    street = forms.CharField()
+    city = forms.CharField()
+    post_code = forms.CharField()
+
+    def clean(self):
+       street = self.cleaned_data['street']
+       city = self.cleaned_data['city']
+       post_code = self.cleaned_data['post_code']
+       self.cleaned_data['address'] = street + ', ' + city + ', ' + post_code
+
+       return self.cleaned_data
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'phone_num', 'address']
+        fields = ['first_name', 'last_name', 'email', 'phone_num', 'street', 'city', 'post_code']
