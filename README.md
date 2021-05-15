@@ -24,6 +24,6 @@ For a small yet rapidly growing landscaping and fencing company in Bristol who n
    http://localhost:8000/
    ```
 
-Please note the project will not run locally without secret environment variables.
-The web app is deployed and fully operational at https://frenchay-fencing.herokuapp.com/
+Please note the project will not run locally without secret environment variables.  
+The web app is deployed and fully operational at https://frenchay-fencing.herokuapp.com/  
 If you require the secrets please contact the author.
